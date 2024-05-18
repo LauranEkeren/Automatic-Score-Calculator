@@ -2,9 +2,8 @@ package com.example.tinycalculator.Domain;
 
 import android.util.Pair;
 
-import com.example.tinycalculator.Domain.Enums.SquareEnum;
+import com.example.tinycalculator.Enums.SquareEnum;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

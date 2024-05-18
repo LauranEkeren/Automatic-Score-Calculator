@@ -1,6 +1,5 @@
-package com.example.tinycalculator.ui.Screens
+package com.example.tinycalculator.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Divider
@@ -8,15 +7,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tinycalculator.Domain.Board
 import com.example.tinycalculator.R
 import com.example.tinycalculator.data.ScoreUiState
-import com.example.tinycalculator.ui.ViewModels.ScoreViewModel
 
 
 @Composable
@@ -24,14 +20,14 @@ fun ScoreScreen(
     scoreUiState: ScoreUiState,
     modifier: Modifier = Modifier,
 ){
-    val resources = LocalContext.current.resources
     val items = listOf(
-        Pair(stringResource(R.string.points_chapels), scoreUiState.scoreChapels),
-        Pair(stringResource(R.string.points_cottages), scoreUiState.scoreCottages),
-        Pair(stringResource(R.string.points_taverns), scoreUiState.scoreTaverns),
-        Pair(stringResource(R.string.points_theaters), scoreUiState.scoreTheaters),
-        Pair(stringResource(R.string.points_wells), scoreUiState.scoreWells),
-        Pair(stringResource(R.string.penalty_empty_squares), scoreUiState.penaltyEmptySquare)
+        Triple(stringResource(R.string.points_chapels), scoreUiState.scoreChapels, true),
+        Triple(stringResource(R.string.points_cottages), scoreUiState.scoreCottages, true),
+        Triple(stringResource(R.string.points_taverns), scoreUiState.scoreTaverns, true),
+        Triple(stringResource(R.string.points_theaters), scoreUiState.scoreTheaters, true),
+        Triple(stringResource(R.string.points_wells), scoreUiState.scoreWells, true),
+        Triple(stringResource(R.string.points_monument), scoreUiState.scoreMonument, scoreUiState.monumentInGame),
+        Triple(stringResource(R.string.penalty_empty_squares), scoreUiState.penaltyEmptySquare, true)
     )
     Column(
         verticalArrangement = Arrangement.Center,
@@ -41,9 +37,11 @@ fun ScoreScreen(
         TotalScoreText(score = scoreUiState.totalScore)
         Divider(thickness = 1.dp)
         items.forEach { item ->
-            Text(text = item.first)
-            Text(text = item.second.toString())
-            Divider(thickness = 1.dp)
+            if (item.third){
+                Text(text = item.first)
+                Text(text = item.second.toString())
+                Divider(thickness = 1.dp)
+            }
         }
     }
 
@@ -51,7 +49,7 @@ fun ScoreScreen(
 }
 
 @Composable
-fun TotalScoreText( score: Int, modifier: Modifier = Modifier){
+fun TotalScoreText( score: Int){
     Text(
         text = (stringResource(R.string.Score) + ": " + score),
         fontSize = 40.sp,

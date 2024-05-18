@@ -1,4 +1,4 @@
-package com.example.tinycalculator.ui.ViewModels
+package com.example.tinycalculator.ui.viewModels
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,21 +9,20 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.tinycalculator.Domain.Factory
 import com.example.tinycalculator.TinyCalculatorApplication
-import com.example.tinycalculator.data.ApiObjectRecognitionRepository
 import com.example.tinycalculator.data.ObjectRecognitionRepository
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.File
 import java.io.IOException
 
+
 sealed interface  HomeUiState {
-    object Success : HomeUiState
-    object HttpError: HomeUiState
-    object IOError: HomeUiState
-    object Loading : HomeUiState
-    object Empty: HomeUiState
+    data object Success : HomeUiState
+    data object HttpError: HomeUiState
+    data object IOError: HomeUiState
+    data object Loading : HomeUiState
+    data object Empty: HomeUiState
 }
 
 class HomeViewModel(private val objectRecognitionRepository: ObjectRecognitionRepository) : ViewModel() {
@@ -35,15 +34,23 @@ class HomeViewModel(private val objectRecognitionRepository: ObjectRecognitionRe
     var grid: String by mutableStateOf("")
         private set
 
-    fun getGrid(file: File) {
+    var showCamera: Boolean by mutableStateOf(false)
+
+    fun resetHomeViewModel(){
+        homeUiState = HomeUiState.Empty
+        grid = ""
+        showCamera = false
+    }
+
+    fun photoTaken(file: File) {
         homeUiState = HomeUiState.Loading
         viewModelScope.launch {
-            // This block causes the double call
             homeUiState = try {
                 val gridResult = objectRecognitionRepository.getGrid(file)
                 grid = gridResult
                 HomeUiState.Success
-            } catch (e: IOException){
+            }
+            catch (e: IOException){
                 grid = ""
                 HomeUiState.IOError
             }

@@ -1,4 +1,4 @@
-package com.example.tinycalculator.Domain.Enums;
+package com.example.tinycalculator.Enums;
 
 public enum SquareEnum {
     Cottage,

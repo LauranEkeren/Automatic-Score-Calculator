@@ -2,13 +2,12 @@ package com.example.tinycalculator.Domain;
 
 import android.util.Pair;
 
-import com.example.tinycalculator.Domain.Enums.SquareEnum;
+import com.example.tinycalculator.Enums.SquareEnum;
 
 import java.util.ArrayList;
 
 public abstract class Square {
-    //TODO Make properties private
-    SquareEnum squareType;
+    public SquareEnum squareType;
     //First is y: Row, second is x: Column
     Pair<Integer, Integer> position;
 

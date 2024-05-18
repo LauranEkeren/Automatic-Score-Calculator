@@ -1,12 +1,11 @@
 package com.example.tinycalculator.Domain;
 
-import android.util.Log;
 import android.util.Pair;
 
-import com.example.tinycalculator.Domain.Enums.SquareEnum;
+import com.example.tinycalculator.Enums.SquareEnum;
+import com.example.tinycalculator.Domain.PurpleBuildings.BarettCastle;
+import com.example.tinycalculator.Enums.PurpleEnum;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +15,22 @@ public class Well extends Square {
     }
 
     public int getScore(Board board){
+        int totalPoints = 0;
         List<Square> adjacentSquares = getAdjacentSquares(board);
-        return (int) adjacentSquares.stream().filter(Cottage.class::isInstance).count();
+        if (board.monumentCard == PurpleEnum.BarettCastle){
+            BarettCastle barettCastle = BarettCastle.getBarettCastleFromBoard(board);
+            if (barettCastle != null){
+                boolean isMonumentOnAdjacentSquare = adjacentSquares.stream()
+                        .anyMatch(sq -> sq.squareType == SquareEnum.Monument);
+                if (isMonumentOnAdjacentSquare){
+                    totalPoints = 2;
+                }
+            }
+        }
+        totalPoints = totalPoints + (int) adjacentSquares.stream().
+                filter(Cottage.class::isInstance).count();
+
+        return totalPoints;
     }
 
     public static int getScoreWells(Board board) {

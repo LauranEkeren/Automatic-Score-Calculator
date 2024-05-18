@@ -2,9 +2,10 @@ package com.example.tinycalculator.Domain;
 
 import android.util.Pair;
 
-import com.example.tinycalculator.Domain.Enums.SquareEnum;
+import com.example.tinycalculator.Enums.SquareEnum;
+import com.example.tinycalculator.Domain.PurpleBuildings.CathedralOfCaterina;
+import com.example.tinycalculator.Enums.PurpleEnum;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,13 @@ public class EmptySquare extends Square {
     }
 
     public static int getPenaltyEmptySquares(Board board){
+        if (board.monumentCard == PurpleEnum.CathedralOfCaterina){
+            CathedralOfCaterina cathedralOfCaterina = CathedralOfCaterina.getCathedralOfCatherinaFromBoard(board);
+            if (cathedralOfCaterina != null){
+                return 0;
+            }
+        }
+
         return -getEmptySquares(board).size();
     }
 }

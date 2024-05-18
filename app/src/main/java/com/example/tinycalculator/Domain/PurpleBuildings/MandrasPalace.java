@@ -1,0 +1,23 @@
+package com.example.tinycalculator.Domain.PurpleBuildings;
+
+import android.util.Pair;
+
+import com.example.tinycalculator.Domain.Board;
+import com.example.tinycalculator.Enums.PurpleEnum;
+import com.example.tinycalculator.Domain.Square;
+
+import java.util.List;
+
+public class MandrasPalace extends PurpleBuilding{
+    public MandrasPalace(Pair<Integer, Integer> position) {
+        super(position, PurpleEnum.MandrasPalace);
+    }
+
+    @Override
+    public int getScore(Board board) {
+        List<Square> adjacentSquares = this.getAdjacentSquares(board);
+        return (int) (2 * adjacentSquares.stream()
+                                .map(sq -> sq.squareType)
+                                .distinct() .count());
+    }
+}

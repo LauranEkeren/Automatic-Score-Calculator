@@ -1,6 +1,5 @@
 package com.example.tinycalculator
 
-import android.content.Context
 import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,25 +21,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.FileProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.tinycalculator.ui.Screens.ScoreScreen
-import com.example.tinycalculator.ui.Screens.StartScreen
-import com.example.tinycalculator.ui.ViewModels.HomeViewModel
-import com.example.tinycalculator.ui.ViewModels.ScoreViewModel
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Objects
+import com.example.tinycalculator.data.DataSourceMonumentCards
+import com.example.tinycalculator.ui.screens.ScoreScreen
+import com.example.tinycalculator.ui.screens.SelectCardScreen
+import com.example.tinycalculator.ui.screens.StartScreen
+import com.example.tinycalculator.ui.viewModels.HomeViewModel
+import com.example.tinycalculator.ui.viewModels.ScoreViewModel
 
 enum class TinyCalculatorScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
-    Score(title = R.string.Score)
+    Score(title = R.string.Score),
+    Monument(title = R.string.choose_monument_card)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -90,32 +88,22 @@ fun TinyCalculatorApp(
                 navigateUp = { navController.navigateUp()})
         }
     ) { innerPadding ->
-        // Can this go somewhere else?
         val scoreUiState by scoreViewModel.uiState.collectAsState()
-
-
         NavHost(
             navController = navController,
             startDestination = TinyCalculatorScreen.Start.name,
             modifier = Modifier.padding(innerPadding)
         ){
             composable(route = TinyCalculatorScreen.Start.name){
+                // Create HomeViewModel here
                 val context = LocalContext.current
-                val file = context.createImageFile()
-                val uri = FileProvider.getUriForFile(
-                    Objects.requireNonNull(context),
-                    BuildConfig.APPLICATION_ID + ".provider", file
-                )
                 StartScreen(
                     homeViewModel = homeViewModel,
                     context = context,
-                    file = file,
-                    uri = uri,
                     onRequestReceived = {
-                        //TODO: Figure out why this log gets called twice.
-                        Log.d("Info", "Does this get called twice?")
-                        scoreViewModel.setScore(homeViewModel.grid)
-                        navController.navigate(TinyCalculatorScreen.Score.name)
+                        scoreViewModel.jsonStringReceived(homeViewModel.grid)
+                        homeViewModel.resetHomeViewModel()
+                        navController.navigate(TinyCalculatorScreen.Monument.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
@@ -123,7 +111,7 @@ fun TinyCalculatorApp(
                 )
             }
             composable(route = TinyCalculatorScreen.Score.name){
-                Log.d("Info", "From TinyCalculatorScreen.kt: composable Score.name. line 80")
+                Log.d("Log", "From TinyCalculatorScreen.kt: composable Score.name. line 80")
                 ScoreScreen(
                     scoreUiState = scoreUiState,
                     modifier = Modifier
@@ -131,18 +119,17 @@ fun TinyCalculatorApp(
                         .padding(16.dp)
                 )
             }
+            composable(route = TinyCalculatorScreen.Monument.name){
+                SelectCardScreen(
+                    options = DataSourceMonumentCards.monumentCards,
+                    onClickCard = {
+                        scoreViewModel.monumentCardSelected(it)
+                        scoreViewModel.calculateScore()
+                        navController.navigate(TinyCalculatorScreen.Score.name)
+                    }
+                )
+            }
         }
     }
 }
 
-fun Context.createImageFile(): File {
-    // Create an image file name
-    val timeStamp = SimpleDateFormat("yyyyMMdd__HHmmss").format(Date())
-    val imageFileName = "JPEG_" + timeStamp + "_"
-    val image = File.createTempFile(
-        imageFileName,
-        ".jpg",
-        externalCacheDir
-    )
-    return image
-}
