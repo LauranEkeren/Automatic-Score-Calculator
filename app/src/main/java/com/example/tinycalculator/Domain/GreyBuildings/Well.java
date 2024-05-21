@@ -1,7 +1,11 @@
-package com.example.tinycalculator.Domain;
+package com.example.tinycalculator.Domain.GreyBuildings;
 
 import android.util.Pair;
 
+import com.example.tinycalculator.Domain.Board;
+import com.example.tinycalculator.Domain.Cottage;
+import com.example.tinycalculator.Domain.Square;
+import com.example.tinycalculator.Enums.GreyEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.BarettCastle;
 import com.example.tinycalculator.Enums.PurpleEnum;
@@ -9,9 +13,9 @@ import com.example.tinycalculator.Enums.PurpleEnum;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Well extends Square {
+public class Well extends GreyBuilding {
     public Well(Pair<Integer, Integer> position){
-        super(position, SquareEnum.Well);
+        super(position, GreyEnum.Well);
     }
 
     public int getScore(Board board){

@@ -3,6 +3,7 @@ package com.example.tinycalculator.ui.viewModels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.tinycalculator.Domain.Board
+import com.example.tinycalculator.Domain.GreyBuildings.GreyBuilding
 import com.example.tinycalculator.Enums.PurpleEnum
 import com.example.tinycalculator.data.ScoreUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +30,14 @@ class ScoreViewModel : ViewModel() {
         }
     }
 
+    fun greyBuildingCardSelected(greyBuildingNameSelected: String){
+        _uiState.update { currentState ->
+            currentState.copy(
+                greyBuildingName = greyBuildingNameSelected
+            )
+        }
+    }
+
     fun monumentCardSelected(monumentNameSelected: String){
         var isMonumentInGame = false;
         if (monumentNameSelected != PurpleEnum.NoPurpleBuilding.name){
@@ -46,7 +55,7 @@ class ScoreViewModel : ViewModel() {
         val cards = HashMap<String, String>()
         cards["Monument"] = _uiState.value.monumentName
         cards["YellowBuilding"] = _uiState.value.yellowBuildingName
-        Log.d("Domain", cards["Monument"].toString())
+        cards["GreyBuilding"] = _uiState.value.greyBuildingName
         val rawStringBoard = _uiState.value.rawScoreString
         val board = Board(rawStringBoard, cards)
         val points = board.calculateScore()

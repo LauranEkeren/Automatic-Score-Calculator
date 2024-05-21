@@ -3,9 +3,12 @@ package com.example.tinycalculator.Domain;
 import android.util.Log;
 import android.util.Pair;
 
-import com.example.tinycalculator.Domain.YellowBuildings.Theater;
+import com.example.tinycalculator.Domain.GreyBuildings.GreyBuilding;
+import com.example.tinycalculator.Domain.GreyBuildings.GreyBuildingsFactory;
+import com.example.tinycalculator.Domain.GreyBuildings.Well;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuilding;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuildingsFactory;
+import com.example.tinycalculator.Enums.GreyEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.NoScoringPurpleBuilding;
 import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuilding;
@@ -22,14 +25,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Board {
-    PurpleEnum monumentCard;
+    public PurpleEnum monumentCard;
     YellowEnum yellowBuildingCard;
+    GreyEnum greyBuildingCard;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
     public Board(String stringFromApi, HashMap<String, String> cards) {
         monumentCard = PurpleEnum.valueOf(cards.get("Monument"));
         yellowBuildingCard = YellowEnum.valueOf(cards.get("YellowBuilding"));
+        greyBuildingCard = GreyEnum.valueOf(cards.get("GreyBuilding"));
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
         placeBuildingsInGridFromArray(stringObjects);
         squareList = returnSquaresAsList();
@@ -57,7 +62,9 @@ public class Board {
 
         YellowBuilding yellowBuilding = YellowBuildingsFactory.createYellowBuilding(Pair.create(0, 0), yellowBuildingCard);
         points.put("Theater", yellowBuilding.getScore(this));
-        points.put("Well", Well.getScoreWells(this));
+
+        GreyBuilding greyBuilding = GreyBuildingsFactory.createGreyBuilding(Pair.create(0, 0), greyBuildingCard);
+        points.put("Well", greyBuilding.getScore(this));
 
         PurpleBuilding purpleBuilding;
         if (monumentCard != PurpleEnum.NoPurpleBuilding) {
@@ -170,7 +177,7 @@ public class Board {
                         squares[y][x] = YellowBuildingsFactory.createYellowBuilding(position, yellowBuildingCard);
                         break;
                     case "Well":
-                        squares[y][x] = new Well(position);
+                        squares[y][x] = GreyBuildingsFactory.createGreyBuilding(position, greyBuildingCard);
                         break;
                     case "Monument":
                         squares[y][x] = PurpleBuildingFactory.createSquare(position, monumentCard);

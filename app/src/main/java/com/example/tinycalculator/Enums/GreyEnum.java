@@ -1,4 +1,8 @@
 package com.example.tinycalculator.Enums;
 
-public class GreyEnum {
+public enum GreyEnum {
+    Shed,
+    Well,
+    Fountain,
+    Millstone
 }

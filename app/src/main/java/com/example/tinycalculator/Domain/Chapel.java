@@ -10,13 +10,13 @@ public class Chapel extends Square {
 
     public Chapel(Pair<Integer, Integer> position)
     {
-        super(position, SquareEnum.Chapel);
+        super(position, SquareEnum.OrangeBuilding);
     }
 
     public static int getScoreChapels(Board board){
         int points = 0;
         int amountChapels = (int) board.getSquaresAsList().stream()
-                .filter(sq -> sq.squareType == SquareEnum.Chapel)
+                .filter(sq -> sq.squareType == SquareEnum.OrangeBuilding)
                 .count();
         if (board.monumentCard == PurpleEnum.BarettCastle){
             BarettCastle barettCastle = BarettCastle.getBarettCastleFromBoard(board);

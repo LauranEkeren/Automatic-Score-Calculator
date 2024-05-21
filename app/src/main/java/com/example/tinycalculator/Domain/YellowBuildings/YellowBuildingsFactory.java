@@ -23,7 +23,6 @@ public class YellowBuildingsFactory {
             default:
                 yellowBuilding = new Theater(position);
         }
-
         return yellowBuilding;
     }
 }

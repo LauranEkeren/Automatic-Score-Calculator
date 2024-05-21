@@ -38,6 +38,7 @@ enum class TinyCalculatorScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
     Score(title = R.string.Score),
     YellowBuilding(title = R.string.choose_yellow_building),
+    GreyBuilding(title = R.string.choose_grey_building),
     Monument(title = R.string.choose_monument_card)
 }
 
@@ -124,9 +125,17 @@ fun TinyCalculatorApp(
                     options = DataSourceCards.yellowBuildingCards,
                     onClickCard = {
                         scoreViewModel.yellowBuildingCardSelected(it)
-                        navController.navigate(TinyCalculatorScreen.Monument.name)
+                        navController.navigate(TinyCalculatorScreen.GreyBuilding.name)
                     }
                 )
+            }
+            composable(route=TinyCalculatorScreen.GreyBuilding.name){
+                SelectCardScreen(
+                    options = DataSourceCards.greyBuildingCards,
+                    onClickCard = {
+                        scoreViewModel.greyBuildingCardSelected(it)
+                        navController.navigate(TinyCalculatorScreen.Monument.name)
+                    })
             }
             composable(route = TinyCalculatorScreen.Monument.name){
                 SelectCardScreen(
