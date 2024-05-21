@@ -21,25 +21,31 @@ class ScoreViewModel : ViewModel() {
         }
     }
 
+    fun yellowBuildingCardSelected(yellowBuildingNameSelected: String){
+        _uiState.update {currentState ->
+            currentState.copy(
+                yellowBuildingName = yellowBuildingNameSelected
+            )
+        }
+    }
+
     fun monumentCardSelected(monumentNameSelected: String){
         var isMonumentInGame = false;
         if (monumentNameSelected != PurpleEnum.NoPurpleBuilding.name){
             isMonumentInGame = true
         }
-        Log.d("Info", _uiState.value.rawScoreString)
         _uiState.update {currentState ->
             currentState.copy(
                 monumentName = monumentNameSelected,
                 monumentInGame = isMonumentInGame
             )
         }
-        Log.d("Info", _uiState.value.rawScoreString)
-
     }
 
     fun calculateScore(){
         val cards = HashMap<String, String>()
         cards["Monument"] = _uiState.value.monumentName
+        cards["YellowBuilding"] = _uiState.value.yellowBuildingName
         Log.d("Domain", cards["Monument"].toString())
         val rawStringBoard = _uiState.value.rawScoreString
         val board = Board(rawStringBoard, cards)

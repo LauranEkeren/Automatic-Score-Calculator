@@ -6,8 +6,8 @@ public enum SquareEnum {
     Farm,
     Tavern,
     Well,
-    Theater,
+    YellowBuilding,
     Factory,
-    Monument,
+    PurpleBuilding,
     Empty
 }

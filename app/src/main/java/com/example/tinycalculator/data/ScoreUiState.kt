@@ -1,12 +1,16 @@
 package com.example.tinycalculator.data
 
 import com.example.tinycalculator.Domain.Board
+import com.example.tinycalculator.Enums.YellowEnum
 
 data class ScoreUiState(
     val rawScoreString: String = "",
     val board: Board? = null,
     val monumentInGame: Boolean = false,
+
     val monumentName: String = "",
+    val yellowBuildingName: String = YellowEnum.Theater.name,
+
     val scoreChapels: Int = 0,
     val scoreCottages: Int = 0,
     val penaltyEmptySquare: Int = 0,

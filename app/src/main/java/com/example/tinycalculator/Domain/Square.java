@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Square {
     public SquareEnum squareType;
     //First is y: Row, second is x: Column
-    Pair<Integer, Integer> position;
+    public Pair<Integer, Integer> position;
 
 
     public Square(Pair<Integer, Integer> position, SquareEnum squareType){

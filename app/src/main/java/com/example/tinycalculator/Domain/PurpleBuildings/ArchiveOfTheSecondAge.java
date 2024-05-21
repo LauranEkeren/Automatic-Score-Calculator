@@ -19,7 +19,7 @@ public class ArchiveOfTheSecondAge extends PurpleBuilding{
         List<Square> squares = board.getSquaresAsList();
         return (int) squares.stream()
                 .map(sq -> sq.squareType)
-                .filter(sq -> sq != SquareEnum.Empty && sq != SquareEnum.Monument)
+                .filter(sq -> sq != SquareEnum.Empty && sq != SquareEnum.PurpleBuilding)
                 .distinct().count();
     }
 }

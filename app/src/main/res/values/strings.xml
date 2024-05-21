@@ -14,4 +14,5 @@
     <string name="api_error_text">Api error. Try again.</string>
     <string name="io_error_text">No internet connection. Connect to the internet.</string>
     <string name="choose_monument_card">Choose Monument Card</string>
+    <string name="choose_yellow_building">"Choose Yellow Card"</string>
 </resources>

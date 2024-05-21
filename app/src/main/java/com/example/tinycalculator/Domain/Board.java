@@ -3,11 +3,15 @@ package com.example.tinycalculator.Domain;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.tinycalculator.Domain.YellowBuildings.Theater;
+import com.example.tinycalculator.Domain.YellowBuildings.YellowBuilding;
+import com.example.tinycalculator.Domain.YellowBuildings.YellowBuildingsFactory;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.NoScoringPurpleBuilding;
 import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuilding;
 import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuildingFactory;
 import com.example.tinycalculator.Enums.PurpleEnum;
+import com.example.tinycalculator.Enums.YellowEnum;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,12 +23,13 @@ import java.util.stream.Collectors;
 
 public class Board {
     PurpleEnum monumentCard;
+    YellowEnum yellowBuildingCard;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
     public Board(String stringFromApi, HashMap<String, String> cards) {
-        Log.d("Domain", "From board: " + cards.get("Monument"));
         monumentCard = PurpleEnum.valueOf(cards.get("Monument"));
+        yellowBuildingCard = YellowEnum.valueOf(cards.get("YellowBuilding"));
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
         placeBuildingsInGridFromArray(stringObjects);
         squareList = returnSquaresAsList();
@@ -44,26 +49,25 @@ public class Board {
         HashMap<String, Integer> points = new HashMap<>();
         int totalScore = 0;
 
+        Farm.feedCottages(this);
+        points.put("Chapel", Chapel.getScoreChapels(this));
+        points.put("Cottage", Cottage.getScoreCottages(this));
+        points.put("EmptyPenalty", EmptySquare.getPenaltyEmptySquares(this));
+        points.put("Tavern", Tavern.getScoreTaverns(this));
+
+        YellowBuilding yellowBuilding = YellowBuildingsFactory.createYellowBuilding(Pair.create(0, 0), yellowBuildingCard);
+        points.put("Theater", yellowBuilding.getScore(this));
+        points.put("Well", Well.getScoreWells(this));
+
         PurpleBuilding purpleBuilding;
         if (monumentCard != PurpleEnum.NoPurpleBuilding) {
             purpleBuilding = squareList.stream()
                     .filter(PurpleBuilding.class::isInstance)
                     .findAny().map(PurpleBuilding.class::cast)
                     .orElse(new NoScoringPurpleBuilding(Pair.create(0, 0)));
-        } else {
-            purpleBuilding = null;
-        }
-
-        Farm.feedCottages(this);
-        points.put("Chapel", Chapel.getScoreChapels(this));
-        points.put("Cottage", Cottage.getScoreCottages(this));
-        points.put("EmptyPenalty", EmptySquare.getPenaltyEmptySquares(this));
-        points.put("Tavern", Tavern.getScoreTaverns(this));
-        points.put("Theater", Theater.getScoreTheaters(this));
-        points.put("Well", Well.getScoreWells(this));
-        if (purpleBuilding != null) {
             points.put("Monument", purpleBuilding.getScore(this));
         }
+
 
         for (int i : points.values()) {
             totalScore += i;
@@ -84,7 +88,6 @@ public class Board {
                 squaresDone.addAll(currentSet);
             }
         }
-
         return largestSet;
     }
 
@@ -108,6 +111,15 @@ public class Board {
         }
         Log.d("Domain", String.valueOf(contiguousGroup.size()));
         return contiguousGroup;
+    }
+
+    public List<Square> getCenterSquares() {
+        List<Square> centerSquares = new ArrayList<>();
+        centerSquares.add(squares[1][1]);
+        centerSquares.add(squares[1][2]);
+        centerSquares.add(squares[2][1]);
+        centerSquares.add(squares[2][2]);
+        return centerSquares;
     }
 
     public String squaresToString() {
@@ -155,13 +167,13 @@ public class Board {
                         squares[y][x] = new Tavern(position);
                         break;
                     case "Theater":
-                        squares[y][x] = new Theater(position);
+                        squares[y][x] = YellowBuildingsFactory.createYellowBuilding(position, yellowBuildingCard);
                         break;
                     case "Well":
                         squares[y][x] = new Well(position);
                         break;
                     case "Monument":
-                        squares[y][x] = PurpleBuildingFactory.createPurpleBuilding(position, monumentCard);
+                        squares[y][x] = PurpleBuildingFactory.createSquare(position, monumentCard);
                         break;
                     default:
                         squares[y][x] = new EmptySquare(position);

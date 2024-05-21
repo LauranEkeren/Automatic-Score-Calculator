@@ -21,7 +21,7 @@ public class Well extends Square {
             BarettCastle barettCastle = BarettCastle.getBarettCastleFromBoard(board);
             if (barettCastle != null){
                 boolean isMonumentOnAdjacentSquare = adjacentSquares.stream()
-                        .anyMatch(sq -> sq.squareType == SquareEnum.Monument);
+                        .anyMatch(sq -> sq.squareType == SquareEnum.PurpleBuilding);
                 if (isMonumentOnAdjacentSquare){
                     totalPoints = 2;
                 }

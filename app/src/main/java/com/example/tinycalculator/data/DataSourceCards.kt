@@ -1,10 +1,11 @@
 package com.example.tinycalculator.data
 
 import com.example.tinycalculator.Enums.PurpleEnum
+import com.example.tinycalculator.Enums.YellowEnum
 import com.example.tinycalculator.R
 import com.example.tinycalculator.model.BuildingCard
 
-object DataSourceMonumentCards {
+object DataSourceCards {
     val monumentCards = listOf(
         BuildingCard(PurpleEnum.NoPurpleBuilding.name, R.drawable.placeholder),
         BuildingCard(PurpleEnum.ArchitectGuild.name, R.drawable.monument_architect_guild),
@@ -23,4 +24,11 @@ object DataSourceMonumentCards {
         BuildingCard(PurpleEnum.TheStarloom.name, R.drawable.monument_the_starloom),
         BuildingCard(PurpleEnum.StatueOfTheBondmaker.name, R.drawable.monument_statue_of_the_bondmaker),
     )
+
+    val yellowBuildingCards = listOf(
+        BuildingCard(YellowEnum.Theater.name, R.drawable.placeholder),
+        BuildingCard(YellowEnum.Bakery.name, R.drawable.placeholder),
+        BuildingCard(YellowEnum.Market.name, R.drawable.placeholder),
+        BuildingCard(YellowEnum.Tailor.name, R.drawable.placeholder),
+        )
 }

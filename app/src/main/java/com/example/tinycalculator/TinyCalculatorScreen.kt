@@ -22,13 +22,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.tinycalculator.data.DataSourceMonumentCards
+import com.example.tinycalculator.data.DataSourceCards
 import com.example.tinycalculator.ui.screens.ScoreScreen
 import com.example.tinycalculator.ui.screens.SelectCardScreen
 import com.example.tinycalculator.ui.screens.StartScreen
@@ -38,6 +37,7 @@ import com.example.tinycalculator.ui.viewModels.ScoreViewModel
 enum class TinyCalculatorScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
     Score(title = R.string.Score),
+    YellowBuilding(title = R.string.choose_yellow_building),
     Monument(title = R.string.choose_monument_card)
 }
 
@@ -103,7 +103,7 @@ fun TinyCalculatorApp(
                     onRequestReceived = {
                         scoreViewModel.jsonStringReceived(homeViewModel.grid)
                         homeViewModel.resetHomeViewModel()
-                        navController.navigate(TinyCalculatorScreen.Monument.name)
+                        navController.navigate(TinyCalculatorScreen.YellowBuilding.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
@@ -119,9 +119,18 @@ fun TinyCalculatorApp(
                         .padding(16.dp)
                 )
             }
+            composable(route=TinyCalculatorScreen.YellowBuilding.name){
+                SelectCardScreen(
+                    options = DataSourceCards.yellowBuildingCards,
+                    onClickCard = {
+                        scoreViewModel.yellowBuildingCardSelected(it)
+                        navController.navigate(TinyCalculatorScreen.Monument.name)
+                    }
+                )
+            }
             composable(route = TinyCalculatorScreen.Monument.name){
                 SelectCardScreen(
-                    options = DataSourceMonumentCards.monumentCards,
+                    options = DataSourceCards.monumentCards,
                     onClickCard = {
                         scoreViewModel.monumentCardSelected(it)
                         scoreViewModel.calculateScore()

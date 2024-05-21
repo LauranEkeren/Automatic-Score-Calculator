@@ -1,8 +1,11 @@
-package com.example.tinycalculator.Domain;
+package com.example.tinycalculator.Domain.YellowBuildings;
 
 import android.util.Pair;
 
+import com.example.tinycalculator.Domain.Board;
+import com.example.tinycalculator.Domain.Square;
 import com.example.tinycalculator.Enums.SquareEnum;
+import com.example.tinycalculator.Enums.YellowEnum;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,14 +15,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-public class Theater extends Square{
+public class Theater extends YellowBuilding {
     public Theater(Pair<Integer, Integer> position){
-        super(position, SquareEnum.Theater);
+        super(position, YellowEnum.Theater);
     }
 
-    public int getScore(Board board){
+    public int getScoreTheater(Board board){
         //Get all buildings in the same row.
-        List<SquareEnum> rowBuildings = Arrays.stream(board.getSquares()[this.position.first]).map(sq -> sq.squareType).distinct().collect(Collectors.toList());
+        List<SquareEnum> rowBuildings = Arrays.stream(board.getSquares()[this.position.first])
+                .map(sq -> sq.squareType)
+                .distinct()
+                .collect(Collectors.toList());
 
         //Get all buildings in the same column.
         List<SquareEnum> columnBuildings = new ArrayList<>();
@@ -31,15 +37,15 @@ public class Theater extends Square{
         }
         Set<SquareEnum> allBuildings = new LinkedHashSet<>(rowBuildings);
         allBuildings.addAll(columnBuildings);
-        allBuildings.remove(SquareEnum.Theater);
+        allBuildings.remove(SquareEnum.YellowBuilding);
         allBuildings.remove(SquareEnum.Empty);
 
         return allBuildings.size();
     }
 
 
-
-    public static int getScoreTheaters(Board board){
+    @Override
+    public int getScore(Board board){
         int score = 0;
         List<Square> squareList = board.getSquaresAsList();
         List<Theater> theaters = squareList.stream()
@@ -48,9 +54,8 @@ public class Theater extends Square{
                 .collect(Collectors.toList());
 
         for (Theater theater : theaters) {
-            score += theater.getScore(board);
+            score += theater.getScoreTheater(board);
         }
-
         return score;
     }
 }

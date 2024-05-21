@@ -10,7 +10,7 @@ import com.example.tinycalculator.Domain.Square;
 public abstract class PurpleBuilding extends Square {
     PurpleEnum purpleBuildingType;
     public PurpleBuilding(Pair<Integer, Integer> position, PurpleEnum purpleBuildingType) {
-        super(position, SquareEnum.Monument);
+        super(position, SquareEnum.PurpleBuilding);
         this.purpleBuildingType = purpleBuildingType;
     }
     public abstract int getScore(Board board);
