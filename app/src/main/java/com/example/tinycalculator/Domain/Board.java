@@ -5,10 +5,13 @@ import android.util.Pair;
 
 import com.example.tinycalculator.Domain.GreyBuildings.GreyBuilding;
 import com.example.tinycalculator.Domain.GreyBuildings.GreyBuildingsFactory;
-import com.example.tinycalculator.Domain.GreyBuildings.Well;
+import com.example.tinycalculator.Domain.OrangeBuildings.Chapel;
+import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuilding;
+import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuildingsFactory;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuilding;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuildingsFactory;
 import com.example.tinycalculator.Enums.GreyEnum;
+import com.example.tinycalculator.Enums.OrangeEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.NoScoringPurpleBuilding;
 import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuilding;
@@ -28,11 +31,13 @@ public class Board {
     public PurpleEnum monumentCard;
     YellowEnum yellowBuildingCard;
     GreyEnum greyBuildingCard;
+    OrangeEnum orangeBuildingCard;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
     public Board(String stringFromApi, HashMap<String, String> cards) {
         monumentCard = PurpleEnum.valueOf(cards.get("Monument"));
+        orangeBuildingCard = OrangeEnum.valueOf(cards.get("OrangeBuilding"));
         yellowBuildingCard = YellowEnum.valueOf(cards.get("YellowBuilding"));
         greyBuildingCard = GreyEnum.valueOf(cards.get("GreyBuilding"));
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
@@ -55,7 +60,10 @@ public class Board {
         int totalScore = 0;
 
         Farm.feedCottages(this);
-        points.put("Chapel", Chapel.getScoreChapels(this));
+
+        OrangeBuilding orangeBuilding = OrangeBuildingsFactory.createOrangeBuilding(Pair.create(0, 0), orangeBuildingCard);
+        points.put("Chapel", orangeBuilding.getScore(this));
+
         points.put("Cottage", Cottage.getScoreCottages(this));
         points.put("EmptyPenalty", EmptySquare.getPenaltyEmptySquares(this));
         points.put("Tavern", Tavern.getScoreTaverns(this));
@@ -129,6 +137,15 @@ public class Board {
         return centerSquares;
     }
 
+    public List<Square> getCornerSquares(){
+        List<Square> cornerSquares = new ArrayList<>();
+        cornerSquares.add(squares[0][0]);
+        cornerSquares.add(squares[3][3]);
+        cornerSquares.add(squares[0][3]);
+        cornerSquares.add(squares[3][0]);
+        return cornerSquares;
+    }
+
     public String squaresToString() {
         StringBuilder stringBuilder = new StringBuilder("Objects:\n");
         for (int y = 0; y < 4; y++) {
@@ -158,7 +175,7 @@ public class Board {
                 Pair<Integer, Integer> position = Pair.create(y, x);
                 switch (stringObjects[total]) {
                     case "Chapel":
-                        squares[y][x] = new Chapel(position);
+                        squares[y][x] = OrangeBuildingsFactory.createOrangeBuilding(position, orangeBuildingCard);
                         break;
                     case "Cottage":
                         Cottage cottage = new Cottage(position);

@@ -1,19 +1,24 @@
-package com.example.tinycalculator.Domain;
+package com.example.tinycalculator.Domain.OrangeBuildings;
 
 import android.util.Pair;
 
+import com.example.tinycalculator.Domain.Board;
+import com.example.tinycalculator.Domain.Cottage;
+import com.example.tinycalculator.Domain.Square;
+import com.example.tinycalculator.Enums.OrangeEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.BarettCastle;
 import com.example.tinycalculator.Enums.PurpleEnum;
 
-public class Chapel extends Square {
+public class Chapel extends OrangeBuilding {
 
     public Chapel(Pair<Integer, Integer> position)
     {
-        super(position, SquareEnum.OrangeBuilding);
+        super(position, OrangeEnum.Chapel);
     }
 
-    public static int getScoreChapels(Board board){
+    @Override
+    public int getScore(Board board){
         int points = 0;
         int amountChapels = (int) board.getSquaresAsList().stream()
                 .filter(sq -> sq.squareType == SquareEnum.OrangeBuilding)
@@ -28,4 +33,5 @@ public class Chapel extends Square {
         points = points + (amountChapels * amountCottagesFed);
         return points;
     }
+
 }

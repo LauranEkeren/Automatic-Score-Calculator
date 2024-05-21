@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Cottage extends Square {
-    boolean isFed = false;
+    public boolean isFed = false;
     public Cottage(Pair<Integer, Integer> position){
         super(position, SquareEnum.Cottage);
     }

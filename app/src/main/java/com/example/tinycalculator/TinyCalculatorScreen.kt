@@ -37,6 +37,7 @@ import com.example.tinycalculator.ui.viewModels.ScoreViewModel
 enum class TinyCalculatorScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
     Score(title = R.string.Score),
+    OrangeBuilding(title = R.string.choose_orange_building),
     YellowBuilding(title = R.string.choose_yellow_building),
     GreyBuilding(title = R.string.choose_grey_building),
     Monument(title = R.string.choose_monument_card)
@@ -104,7 +105,7 @@ fun TinyCalculatorApp(
                     onRequestReceived = {
                         scoreViewModel.jsonStringReceived(homeViewModel.grid)
                         homeViewModel.resetHomeViewModel()
-                        navController.navigate(TinyCalculatorScreen.YellowBuilding.name)
+                        navController.navigate(TinyCalculatorScreen.OrangeBuilding.name)
                     },
                     modifier = Modifier
                         .fillMaxSize()
@@ -112,13 +113,20 @@ fun TinyCalculatorApp(
                 )
             }
             composable(route = TinyCalculatorScreen.Score.name){
-                Log.d("Log", "From TinyCalculatorScreen.kt: composable Score.name. line 80")
                 ScoreScreen(
                     scoreUiState = scoreUiState,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp)
                 )
+            }
+            composable(route=TinyCalculatorScreen.OrangeBuilding.name){
+                SelectCardScreen(
+                    options = DataSourceCards.orangeBuildingCards,
+                    onClickCard = {
+                        scoreViewModel.orangeBuildingCardSelected(it);
+                        navController.navigate(TinyCalculatorScreen.YellowBuilding.name)
+                    })
             }
             composable(route=TinyCalculatorScreen.YellowBuilding.name){
                 SelectCardScreen(

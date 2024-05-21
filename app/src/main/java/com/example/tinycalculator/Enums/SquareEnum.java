@@ -3,7 +3,7 @@ package com.example.tinycalculator.Enums;
 public enum SquareEnum {
     Cottage,
     OrangeBuilding,
-    Farm,
+    RedBuilding,
     Tavern,
     GreyBuilding,
     YellowBuilding,

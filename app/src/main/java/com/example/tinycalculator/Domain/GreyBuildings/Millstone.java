@@ -16,7 +16,7 @@ public class Millstone extends GreyBuilding{
 
     public int getScoreMillstone(Board board){
         boolean adjacentToRedOrYellowBuilding = this.getAdjacentSquares(board).stream()
-                .anyMatch(sq -> sq.squareType == SquareEnum.Farm || sq.squareType == SquareEnum.YellowBuilding);
+                .anyMatch(sq -> sq.squareType == SquareEnum.RedBuilding || sq.squareType == SquareEnum.YellowBuilding);
         if (adjacentToRedOrYellowBuilding){
             return 2;
         } else {

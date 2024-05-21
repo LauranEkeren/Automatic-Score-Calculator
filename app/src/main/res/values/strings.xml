@@ -16,4 +16,5 @@
     <string name="choose_monument_card">Choose Monument Card</string>
     <string name="choose_yellow_building">"Choose Yellow Card"</string>
     <string name="choose_grey_building">"Choose Grey Card</string>
+    <string name="choose_orange_building">Choose Orange Card</string>
 </resources>
