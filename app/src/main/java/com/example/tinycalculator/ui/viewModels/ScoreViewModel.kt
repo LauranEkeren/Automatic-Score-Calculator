@@ -22,6 +22,14 @@ class ScoreViewModel : ViewModel() {
         }
     }
 
+    fun redBuildingCardSelected(redBuildingNameSelected: String){
+        _uiState.update { currentState ->
+            currentState.copy(
+                redBuildingName = redBuildingNameSelected
+            )
+        }
+    }
+
     fun orangeBuildingCardSelected(orangeBuildingNameSelected: String){
         _uiState.update { currentState ->
             currentState.copy(
@@ -61,14 +69,15 @@ class ScoreViewModel : ViewModel() {
     fun calculateScore(){
         val cards = HashMap<String, String>()
         cards["Monument"] = _uiState.value.monumentName
+        cards["RedBuilding"] = _uiState.value.redBuildingName
         cards["OrangeBuilding"] = _uiState.value.orangeBuildingName
         cards["YellowBuilding"] = _uiState.value.yellowBuildingName
         cards["GreyBuilding"] = _uiState.value.greyBuildingName
         val rawStringBoard = _uiState.value.rawScoreString
         val board = Board(rawStringBoard, cards)
         val points = board.calculateScore()
-        _uiState.update {
-            ScoreUiState(
+        _uiState.update {currentState ->
+            currentState.copy(
                 rawScoreString = rawStringBoard,
                 board = board,
                 monumentInGame = points.containsKey("Monument"),

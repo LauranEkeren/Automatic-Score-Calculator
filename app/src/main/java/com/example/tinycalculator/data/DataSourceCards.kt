@@ -45,8 +45,8 @@ object DataSourceCards {
     val orangeBuildingCards = listOf(
         BuildingCard(OrangeEnum.Chapel.name, R.drawable.placeholder),
         BuildingCard(OrangeEnum.Abbey.name, R.drawable.placeholder),
-        BuildingCard(OrangeEnum.Chapel.name, R.drawable.placeholder),
         BuildingCard(OrangeEnum.Cloister.name, R.drawable.placeholder),
+        BuildingCard(OrangeEnum.Temple.name, R.drawable.placeholder),
         )
 
     val redBuildingCards = listOf(

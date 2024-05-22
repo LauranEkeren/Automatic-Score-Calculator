@@ -18,7 +18,7 @@ public class Well extends GreyBuilding {
         super(position, GreyEnum.Well);
     }
 
-    public int getScore(Board board){
+    public int getScoreWell(Board board){
         int totalPoints = 0;
         List<Square> adjacentSquares = getAdjacentSquares(board);
         if (board.monumentCard == PurpleEnum.BarettCastle){
@@ -37,7 +37,7 @@ public class Well extends GreyBuilding {
         return totalPoints;
     }
 
-    public static int getScoreWells(Board board) {
+    public int getScore(Board board) {
         int score = 0;
         List<Square> squareList = board.getSquaresAsList();
         List<Well> wells = squareList.stream()
@@ -46,7 +46,7 @@ public class Well extends GreyBuilding {
                 .collect(Collectors.toList());
 
         for (Well well : wells) {
-            score += well.getScore(board);
+            score += well.getScoreWell(board);
         }
         return score;
     }

@@ -4,6 +4,7 @@ import com.example.tinycalculator.Domain.Board
 import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuilding
 import com.example.tinycalculator.Enums.GreyEnum
 import com.example.tinycalculator.Enums.OrangeEnum
+import com.example.tinycalculator.Enums.RedEnum
 import com.example.tinycalculator.Enums.YellowEnum
 
 data class ScoreUiState(
@@ -12,6 +13,7 @@ data class ScoreUiState(
     val monumentInGame: Boolean = false,
 
     val monumentName: String = "",
+    val redBuildingName: String = RedEnum.Greenhouse.name,
     val orangeBuildingName: String = OrangeEnum.Chapel.name,
     val yellowBuildingName: String = YellowEnum.Theater.name,
     val greyBuildingName: String = GreyEnum.Millstone.name,

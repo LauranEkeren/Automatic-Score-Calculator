@@ -5,13 +5,16 @@ import android.util.Pair;
 
 import com.example.tinycalculator.Domain.GreyBuildings.GreyBuilding;
 import com.example.tinycalculator.Domain.GreyBuildings.GreyBuildingsFactory;
-import com.example.tinycalculator.Domain.OrangeBuildings.Chapel;
 import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuilding;
 import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuildingsFactory;
+import com.example.tinycalculator.Domain.RedBuildings.Farm;
+import com.example.tinycalculator.Domain.RedBuildings.RedBuilding;
+import com.example.tinycalculator.Domain.RedBuildings.RedBuildingsFactory;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuilding;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuildingsFactory;
 import com.example.tinycalculator.Enums.GreyEnum;
 import com.example.tinycalculator.Enums.OrangeEnum;
+import com.example.tinycalculator.Enums.RedEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.NoScoringPurpleBuilding;
 import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuilding;
@@ -28,21 +31,24 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Board {
+    RedEnum redBuildingCard;
     public PurpleEnum monumentCard;
     YellowEnum yellowBuildingCard;
     GreyEnum greyBuildingCard;
-    OrangeEnum orangeBuildingCard;
+    public OrangeEnum orangeBuildingCard;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
     public Board(String stringFromApi, HashMap<String, String> cards) {
         monumentCard = PurpleEnum.valueOf(cards.get("Monument"));
+        redBuildingCard = RedEnum.valueOf(cards.get("RedBuilding"));
         orangeBuildingCard = OrangeEnum.valueOf(cards.get("OrangeBuilding"));
         yellowBuildingCard = YellowEnum.valueOf(cards.get("YellowBuilding"));
         greyBuildingCard = GreyEnum.valueOf(cards.get("GreyBuilding"));
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
         placeBuildingsInGridFromArray(stringObjects);
         squareList = returnSquaresAsList();
+        Log.d("Domain", cards.toString());
     }
 
     public Square[][] getSquares() {
@@ -59,7 +65,8 @@ public class Board {
         HashMap<String, Integer> points = new HashMap<>();
         int totalScore = 0;
 
-        Farm.feedCottages(this);
+        RedBuilding redBuilding = RedBuildingsFactory.createRedBuilding(Pair.create(0, 0), redBuildingCard);
+        redBuilding.feedCottages(this);
 
         OrangeBuilding orangeBuilding = OrangeBuildingsFactory.createOrangeBuilding(Pair.create(0, 0), orangeBuildingCard);
         points.put("Chapel", orangeBuilding.getScore(this));
@@ -185,7 +192,7 @@ public class Board {
                         squares[y][x] = new Factory(position);
                         break;
                     case "Farm":
-                        squares[y][x] = new Farm(position);
+                        squares[y][x] = RedBuildingsFactory.createRedBuilding(position, redBuildingCard);
                         break;
                     case "Tavern":
                         squares[y][x] = new Tavern(position);

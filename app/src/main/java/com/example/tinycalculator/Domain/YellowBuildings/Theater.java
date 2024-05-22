@@ -21,6 +21,7 @@ public class Theater extends YellowBuilding {
     }
 
     public int getScoreTheater(Board board){
+        //TODO: MOVE GETTING ROW AND COLUMN BUILDINGS TO SQUARE
         //Get all buildings in the same row.
         List<SquareEnum> rowBuildings = Arrays.stream(board.getSquares()[this.position.first])
                 .map(sq -> sq.squareType)

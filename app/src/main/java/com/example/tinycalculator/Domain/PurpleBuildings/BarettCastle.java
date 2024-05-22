@@ -21,6 +21,9 @@ public class BarettCastle extends PurpleBuilding{
     }
 
     public static BarettCastle getBarettCastleFromBoard(Board board){
+        if (board.monumentCard != PurpleEnum.BarettCastle){
+            return null;
+        }
         return  board.getSquaresAsList().stream()
                 .filter(PurpleBuilding.class::isInstance)
                 .findAny().map(BarettCastle.class::cast)

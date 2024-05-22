@@ -1,11 +1,15 @@
-package com.example.tinycalculator.Domain;
+package com.example.tinycalculator.Domain.RedBuildings;
 
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.tinycalculator.Domain.Board;
+import com.example.tinycalculator.Domain.Cottage;
 import com.example.tinycalculator.Domain.OrangeBuildings.Temple;
+import com.example.tinycalculator.Domain.Square;
 import com.example.tinycalculator.Domain.Utils.BinaryCounter;
 import com.example.tinycalculator.Enums.OrangeEnum;
+import com.example.tinycalculator.Enums.RedEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.BarettCastle;
 import com.example.tinycalculator.Enums.PurpleEnum;
@@ -14,9 +18,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Farm extends Square {
+public class Farm extends RedBuilding {
     public Farm(Pair<Integer, Integer> position) {
-        super(position, SquareEnum.RedBuilding);
+        super(position, RedEnum.Farm);
     }
 
     public static List<Farm> getFarms(Board board) {
@@ -26,7 +30,7 @@ public class Farm extends Square {
                 .collect(Collectors.toList());
     }
 
-    public static void feedCottages(Board board) {
+    public void feedCottages(Board board) {
         int amountFarms = (int) board.getSquaresAsList().stream().filter(sq -> sq.squareType == SquareEnum.RedBuilding).count();
         int amountFood = amountFarms * 4;
         if (board.orangeBuildingCard == OrangeEnum.Temple) {
@@ -60,7 +64,6 @@ public class Farm extends Square {
         if (barettCastle != null) {
             amountToFeed++;
         }
-
 
         // There is more food than buildings that can be fed
         if (amountToFeed < amountFood) {
