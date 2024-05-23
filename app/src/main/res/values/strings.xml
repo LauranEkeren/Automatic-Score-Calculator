@@ -21,4 +21,12 @@
     <string name="choose_red_building">Choose Red Card</string>
     <string name="choose_green_building">Choose Green Card</string>
     <string name="choose_black_building">Choose Black Card</string>
+    <string name="select_amount">Select Amount</string>
+    <string name="amount_warehouse">Amount resources on warehouses</string>
+    <string name="amount_feast_hall_neighbour">Amount green buildings on neighbours board</string>
+    <string name="select_position">Select Position</string>
+    <string name="select_position_city_built">Select your position for finishing your city</string>
+    <string name="select_amount_buildings">Select Amount Buildings</string>
+    <string name="select_amount_buildings_on_board_when_built">Select how many buildings were on the board when you built the monument</string>
+    <string name="next">Next</string>
 </resources>

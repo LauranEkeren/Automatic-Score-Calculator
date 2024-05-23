@@ -43,10 +43,14 @@ public class Board {
     GreyEnum greyBuildingCard;
     BlackEnum blackBuildingCard;
     public OrangeEnum orangeBuildingCard;
+    public final int warehouseNumber;
+    public final int amountFeastHallNeighbour;
+    public final int amountStarloom;
+    public final int amountTree;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
-    public Board(String stringFromApi, HashMap<String, String> cards) {
+    public Board(String stringFromApi, HashMap<String, String> cards, int warehouseNumber, int amountFeastHallNeighbour, int amountStarloom, int amountTree) {
         monumentCard = PurpleEnum.valueOf(cards.get("Monument"));
         redBuildingCard = RedEnum.valueOf(cards.get("RedBuilding"));
         orangeBuildingCard = OrangeEnum.valueOf(cards.get("OrangeBuilding"));
@@ -54,6 +58,10 @@ public class Board {
         greyBuildingCard = GreyEnum.valueOf(cards.get("GreyBuilding"));
         greenBuildingCard = GreenEnum.valueOf(cards.get("GreenBuilding"));
         blackBuildingCard = BlackEnum.valueOf(cards.get("BlackBuilding"));
+        this.warehouseNumber = warehouseNumber;
+        this.amountFeastHallNeighbour = amountFeastHallNeighbour;
+        this.amountStarloom = amountStarloom;
+        this.amountTree = amountTree;
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
         placeBuildingsInGridFromArray(stringObjects);
         squareList = returnSquaresAsList();

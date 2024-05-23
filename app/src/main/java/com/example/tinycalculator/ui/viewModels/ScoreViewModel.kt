@@ -1,9 +1,7 @@
 package com.example.tinycalculator.ui.viewModels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.tinycalculator.Domain.Board
-import com.example.tinycalculator.Domain.GreyBuildings.GreyBuilding
 import com.example.tinycalculator.Enums.PurpleEnum
 import com.example.tinycalculator.data.ScoreUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,7 +69,7 @@ class ScoreViewModel : ViewModel() {
     }
 
     fun monumentCardSelected(monumentNameSelected: String){
-        var isMonumentInGame = false;
+        var isMonumentInGame = false
         if (monumentNameSelected != PurpleEnum.NoPurpleBuilding.name){
             isMonumentInGame = true
         }
@@ -80,6 +78,94 @@ class ScoreViewModel : ViewModel() {
                 monumentName = monumentNameSelected,
                 monumentInGame = isMonumentInGame
             )
+        }
+    }
+
+    fun amountOnWareHouseIncreased(){
+        val currentAmountOnWarehouse = _uiState.value.amountOnWarehouse
+        if (currentAmountOnWarehouse < 48){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountOnWarehouse = currentAmountOnWarehouse + 1
+                )
+            }
+        }
+    }
+
+    fun amountOnWareHouseDecreased(){
+        val currentAmountOnWarehouse = _uiState.value.amountOnWarehouse
+        if (currentAmountOnWarehouse > 0){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountOnWarehouse = currentAmountOnWarehouse - 1
+                )
+            }
+        }
+    }
+
+    fun amountOnNeighboursBoardIncreased(){
+        val currentAmountOnNeighboursBoard = _uiState.value.amountFeastHallOnNeighboursBoard
+        if (currentAmountOnNeighboursBoard < 16){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountFeastHallOnNeighboursBoard = currentAmountOnNeighboursBoard + 1
+                )
+            }
+        }
+    }
+
+    fun amountOnNeighboursBoardDecreased(){
+        val currentAmountOnNeighboursBoard = _uiState.value.amountFeastHallOnNeighboursBoard
+        if (currentAmountOnNeighboursBoard > 0){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountFeastHallOnNeighboursBoard = currentAmountOnNeighboursBoard - 1
+                )
+            }
+        }
+    }
+
+    fun amountStarloomIncreased(){
+        val currentStarloom = _uiState.value.amountStarloom
+        if (currentStarloom < 6){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountStarloom = currentStarloom + 1
+                )
+            }
+        }
+    }
+
+    fun amountStarloomDecreased(){
+        val currentStarloom = _uiState.value.amountStarloom
+        if (currentStarloom > 1){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountStarloom = currentStarloom - 1
+                )
+            }
+        }
+    }
+
+    fun amountTreeIncreased(){
+        val currentTree = _uiState.value.amountTree
+        if (currentTree < 14){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountTree = currentTree + 1
+                )
+            }
+        }
+    }
+
+    fun amountTreeDecreased(){
+        val currentTree = _uiState.value.amountTree
+        if (currentTree > 1){
+            _uiState.update {currentState ->
+                currentState.copy(
+                    amountTree = currentTree - 1
+                )
+            }
         }
     }
 
@@ -93,7 +179,11 @@ class ScoreViewModel : ViewModel() {
         cards["GreenBuilding"] = _uiState.value.greenBuildingName
         cards["BlackBuilding"] = _uiState.value.blackBuildingName
         val rawStringBoard = _uiState.value.rawScoreString
-        val board = Board(rawStringBoard, cards)
+        val wareHouseNumber = _uiState.value.amountOnWarehouse
+        val amountFeastHallNeighbours = _uiState.value.amountFeastHallOnNeighboursBoard
+        val amountStarloom = _uiState.value.amountStarloom
+        val amountTree = _uiState.value.amountTree
+        val board = Board(rawStringBoard, cards, wareHouseNumber, amountFeastHallNeighbours, amountStarloom, amountTree)
         val points = board.calculateScore()
         _uiState.update {currentState ->
             currentState.copy(

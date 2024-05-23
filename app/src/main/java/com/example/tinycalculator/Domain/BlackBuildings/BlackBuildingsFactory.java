@@ -5,6 +5,7 @@ import android.util.Pair;
 import com.example.tinycalculator.Enums.BlackEnum;
 
 public class BlackBuildingsFactory {
+
     static public BlackBuilding createBlackBuilding(Pair<Integer, Integer> position, BlackEnum blackEnum){
         BlackBuilding blackBuilding;
         switch (blackEnum){

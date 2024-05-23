@@ -1,8 +1,6 @@
 package com.example.tinycalculator.data
 
 import com.example.tinycalculator.Domain.Board
-import com.example.tinycalculator.Domain.GreenBuildings.GreenBuilding
-import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuilding
 import com.example.tinycalculator.Enums.BlackEnum
 import com.example.tinycalculator.Enums.GreenEnum
 import com.example.tinycalculator.Enums.GreyEnum
@@ -22,6 +20,11 @@ data class ScoreUiState(
     val yellowBuildingName: String = YellowEnum.Theater.name,
     val greyBuildingName: String = GreyEnum.Millstone.name,
     val blackBuildingName: String = BlackEnum.Factory.name,
+
+    val amountOnWarehouse: Int = 0,
+    val amountFeastHallOnNeighboursBoard: Int = 0,
+    val amountStarloom: Int = 1,
+    val amountTree: Int = 1,
 
     val scoreChapels: Int = 0,
     val scoreCottages: Int = 0,

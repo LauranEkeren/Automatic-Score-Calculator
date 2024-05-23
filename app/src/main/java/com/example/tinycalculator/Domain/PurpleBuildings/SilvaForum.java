@@ -12,6 +12,6 @@ public class SilvaForum extends PurpleBuilding{
 
     @Override
     public int getScore(Board board) {
-        return board.getSizeOfLargesContiguousGroupOfSameBuildingType();
+        return board.getSizeOfLargesContiguousGroupOfSameBuildingType() + 1;
     }
 }

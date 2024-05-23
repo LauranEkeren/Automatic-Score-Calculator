@@ -12,7 +12,7 @@ import com.example.tinycalculator.model.BuildingCard
 
 object DataSourceCards {
     val monumentCards = listOf(
-        BuildingCard(PurpleEnum.NoPurpleBuilding.name, R.drawable.placeholder),
+        BuildingCard(PurpleEnum.NoPurpleBuilding.name, R.drawable.back_purple),
         BuildingCard(PurpleEnum.ArchitectGuild.name, R.drawable.monument_architect_guild),
         BuildingCard(PurpleEnum.ArchiveOfTheSecondAge.name, R.drawable.monument_archive_of_the_second_age),
         BuildingCard(PurpleEnum.BarettCastle.name, R.drawable.monument_barett_castle),
@@ -31,44 +31,44 @@ object DataSourceCards {
     )
 
     val yellowBuildingCards = listOf(
-        BuildingCard(YellowEnum.Theater.name, R.drawable.placeholder),
-        BuildingCard(YellowEnum.Bakery.name, R.drawable.placeholder),
-        BuildingCard(YellowEnum.Market.name, R.drawable.placeholder),
-        BuildingCard(YellowEnum.Tailor.name, R.drawable.placeholder),
+        BuildingCard(YellowEnum.Theater.name, R.drawable.yellow_theater),
+        BuildingCard(YellowEnum.Bakery.name, R.drawable.yellow_bakery),
+        BuildingCard(YellowEnum.Market.name, R.drawable.yellow_market),
+        BuildingCard(YellowEnum.Tailor.name, R.drawable.yellow_tailor),
         )
 
     val greyBuildingCards = listOf(
-        BuildingCard(GreyEnum.Well.name, R.drawable.placeholder),
-        BuildingCard(GreyEnum.Fountain.name, R.drawable.placeholder),
-        BuildingCard(GreyEnum.Millstone.name, R.drawable.placeholder),
-        BuildingCard(GreyEnum.Shed.name, R.drawable.placeholder),
+        BuildingCard(GreyEnum.Well.name, R.drawable.grey_well),
+        BuildingCard(GreyEnum.Fountain.name, R.drawable.grey_fountain),
+        BuildingCard(GreyEnum.Millstone.name, R.drawable.grey_millstone),
+        BuildingCard(GreyEnum.Shed.name, R.drawable.grey_shed),
         )
 
     val orangeBuildingCards = listOf(
-        BuildingCard(OrangeEnum.Chapel.name, R.drawable.placeholder),
-        BuildingCard(OrangeEnum.Abbey.name, R.drawable.placeholder),
-        BuildingCard(OrangeEnum.Cloister.name, R.drawable.placeholder),
-        BuildingCard(OrangeEnum.Temple.name, R.drawable.placeholder),
+        BuildingCard(OrangeEnum.Chapel.name, R.drawable.orange_chapel),
+        BuildingCard(OrangeEnum.Abbey.name, R.drawable.orange_abbey),
+        BuildingCard(OrangeEnum.Cloister.name, R.drawable.orange_cloister),
+        BuildingCard(OrangeEnum.Temple.name, R.drawable.orange_temple),
         )
 
     val redBuildingCards = listOf(
-        BuildingCard(RedEnum.Farm.name, R.drawable.placeholder),
-        BuildingCard(RedEnum.Granary.name, R.drawable.placeholder),
-        BuildingCard(RedEnum.Greenhouse.name, R.drawable.placeholder),
-        BuildingCard(RedEnum.Orchard.name, R.drawable.placeholder),
+        BuildingCard(RedEnum.Farm.name, R.drawable.red_farm),
+        BuildingCard(RedEnum.Granary.name, R.drawable.red_granary),
+        BuildingCard(RedEnum.Greenhouse.name, R.drawable.red_greenhouse),
+        BuildingCard(RedEnum.Orchard.name, R.drawable.red_orchard),
         )
 
     val greenBuildingCards = listOf(
-        BuildingCard(GreenEnum.Tavern.name, R.drawable.placeholder),
-        BuildingCard(GreenEnum.Almshouse.name, R.drawable.placeholder),
-        BuildingCard(GreenEnum.FeastHall.name, R.drawable.placeholder),
-        BuildingCard(GreenEnum.Inn.name, R.drawable.placeholder),
+        BuildingCard(GreenEnum.Tavern.name, R.drawable.green_tavern),
+        BuildingCard(GreenEnum.Almshouse.name, R.drawable.green_almshouse),
+        BuildingCard(GreenEnum.FeastHall.name, R.drawable.green_feast_hall),
+        BuildingCard(GreenEnum.Inn.name, R.drawable.green_inn),
         )
 
     val blackBuildingCards = listOf(
-        BuildingCard(BlackEnum.Factory.name, R.drawable.placeholder),
-        BuildingCard(BlackEnum.Bank.name, R.drawable.placeholder),
-        BuildingCard(BlackEnum.TradingPost.name, R.drawable.placeholder),
-        BuildingCard(BlackEnum.Warehouse.name, R.drawable.placeholder),
+        BuildingCard(BlackEnum.Factory.name, R.drawable.black_factory),
+        BuildingCard(BlackEnum.Bank.name, R.drawable.black_bank),
+        BuildingCard(BlackEnum.TradingPost.name, R.drawable.black_tradingpost),
+        BuildingCard(BlackEnum.Warehouse.name, R.drawable.black_warehouse),
         )
 }
