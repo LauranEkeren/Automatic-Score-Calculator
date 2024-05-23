@@ -1,6 +1,6 @@
 package com.example.tinycalculator.Domain;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.CathedralOfCaterina;

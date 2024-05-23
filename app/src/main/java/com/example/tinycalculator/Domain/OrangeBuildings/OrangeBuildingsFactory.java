@@ -1,7 +1,7 @@
 package com.example.tinycalculator.Domain.OrangeBuildings;
 
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Enums.OrangeEnum;
 

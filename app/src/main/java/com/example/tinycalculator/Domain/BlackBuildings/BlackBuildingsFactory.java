@@ -1,6 +1,6 @@
 package com.example.tinycalculator.Domain.BlackBuildings;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Enums.BlackEnum;
 

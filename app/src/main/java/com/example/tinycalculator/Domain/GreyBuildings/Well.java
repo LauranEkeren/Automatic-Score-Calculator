@@ -1,6 +1,6 @@
 package com.example.tinycalculator.Domain.GreyBuildings;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Domain.Board;
 import com.example.tinycalculator.Domain.Cottage;

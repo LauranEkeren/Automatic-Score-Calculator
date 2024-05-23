@@ -1,6 +1,6 @@
 package com.example.tinycalculator.Domain.RedBuildings;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Enums.RedEnum;
 

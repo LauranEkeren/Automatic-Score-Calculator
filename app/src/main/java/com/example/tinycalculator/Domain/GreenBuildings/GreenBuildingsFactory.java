@@ -1,6 +1,6 @@
 package com.example.tinycalculator.Domain.GreenBuildings;
 
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Enums.GreenEnum;
 

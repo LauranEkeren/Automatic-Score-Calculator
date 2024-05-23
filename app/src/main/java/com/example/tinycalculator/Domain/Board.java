@@ -1,7 +1,7 @@
 package com.example.tinycalculator.Domain;
 
 import android.util.Log;
-import android.util.Pair;
+import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Domain.BlackBuildings.BlackBuilding;
 import com.example.tinycalculator.Domain.BlackBuildings.BlackBuildingsFactory;
