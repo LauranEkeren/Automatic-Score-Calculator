@@ -1,5 +1,7 @@
 package com.example.tinycalculator.data
 
+import com.example.tinycalculator.Enums.BlackEnum
+import com.example.tinycalculator.Enums.GreenEnum
 import com.example.tinycalculator.Enums.GreyEnum
 import com.example.tinycalculator.Enums.OrangeEnum
 import com.example.tinycalculator.Enums.PurpleEnum
@@ -54,5 +56,19 @@ object DataSourceCards {
         BuildingCard(RedEnum.Granary.name, R.drawable.placeholder),
         BuildingCard(RedEnum.Greenhouse.name, R.drawable.placeholder),
         BuildingCard(RedEnum.Orchard.name, R.drawable.placeholder),
+        )
+
+    val greenBuildingCards = listOf(
+        BuildingCard(GreenEnum.Tavern.name, R.drawable.placeholder),
+        BuildingCard(GreenEnum.Almshouse.name, R.drawable.placeholder),
+        BuildingCard(GreenEnum.FeastHall.name, R.drawable.placeholder),
+        BuildingCard(GreenEnum.Inn.name, R.drawable.placeholder),
+        )
+
+    val blackBuildingCards = listOf(
+        BuildingCard(BlackEnum.Factory.name, R.drawable.placeholder),
+        BuildingCard(BlackEnum.Bank.name, R.drawable.placeholder),
+        BuildingCard(BlackEnum.TradingPost.name, R.drawable.placeholder),
+        BuildingCard(BlackEnum.Warehouse.name, R.drawable.placeholder),
         )
 }

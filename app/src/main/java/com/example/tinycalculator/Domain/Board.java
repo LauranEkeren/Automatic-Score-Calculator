@@ -3,15 +3,20 @@ package com.example.tinycalculator.Domain;
 import android.util.Log;
 import android.util.Pair;
 
+import com.example.tinycalculator.Domain.BlackBuildings.BlackBuilding;
+import com.example.tinycalculator.Domain.BlackBuildings.BlackBuildingsFactory;
+import com.example.tinycalculator.Domain.GreenBuildings.GreenBuilding;
+import com.example.tinycalculator.Domain.GreenBuildings.GreenBuildingsFactory;
 import com.example.tinycalculator.Domain.GreyBuildings.GreyBuilding;
 import com.example.tinycalculator.Domain.GreyBuildings.GreyBuildingsFactory;
 import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuilding;
 import com.example.tinycalculator.Domain.OrangeBuildings.OrangeBuildingsFactory;
-import com.example.tinycalculator.Domain.RedBuildings.Farm;
 import com.example.tinycalculator.Domain.RedBuildings.RedBuilding;
 import com.example.tinycalculator.Domain.RedBuildings.RedBuildingsFactory;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuilding;
 import com.example.tinycalculator.Domain.YellowBuildings.YellowBuildingsFactory;
+import com.example.tinycalculator.Enums.BlackEnum;
+import com.example.tinycalculator.Enums.GreenEnum;
 import com.example.tinycalculator.Enums.GreyEnum;
 import com.example.tinycalculator.Enums.OrangeEnum;
 import com.example.tinycalculator.Enums.RedEnum;
@@ -31,10 +36,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Board {
+    GreenEnum greenBuildingCard;
     RedEnum redBuildingCard;
     public PurpleEnum monumentCard;
     YellowEnum yellowBuildingCard;
     GreyEnum greyBuildingCard;
+    BlackEnum blackBuildingCard;
     public OrangeEnum orangeBuildingCard;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
@@ -45,6 +52,8 @@ public class Board {
         orangeBuildingCard = OrangeEnum.valueOf(cards.get("OrangeBuilding"));
         yellowBuildingCard = YellowEnum.valueOf(cards.get("YellowBuilding"));
         greyBuildingCard = GreyEnum.valueOf(cards.get("GreyBuilding"));
+        greenBuildingCard = GreenEnum.valueOf(cards.get("GreenBuilding"));
+        blackBuildingCard = BlackEnum.valueOf(cards.get("BlackBuilding"));
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
         placeBuildingsInGridFromArray(stringObjects);
         squareList = returnSquaresAsList();
@@ -73,13 +82,18 @@ public class Board {
 
         points.put("Cottage", Cottage.getScoreCottages(this));
         points.put("EmptyPenalty", EmptySquare.getPenaltyEmptySquares(this));
-        points.put("Tavern", Tavern.getScoreTaverns(this));
+
+        GreenBuilding greenBuilding = GreenBuildingsFactory.createGreenBuilding(Pair.create(0, 0), greenBuildingCard);
+        points.put("Tavern", greenBuilding.getScore(this));
 
         YellowBuilding yellowBuilding = YellowBuildingsFactory.createYellowBuilding(Pair.create(0, 0), yellowBuildingCard);
         points.put("Theater", yellowBuilding.getScore(this));
 
         GreyBuilding greyBuilding = GreyBuildingsFactory.createGreyBuilding(Pair.create(0, 0), greyBuildingCard);
         points.put("Well", greyBuilding.getScore(this));
+
+        BlackBuilding blackBuilding = BlackBuildingsFactory.createBlackBuilding(Pair.create(0, 0), blackBuildingCard);
+        points.put("Factory", blackBuilding.getScore(this));
 
         PurpleBuilding purpleBuilding;
         if (monumentCard != PurpleEnum.NoPurpleBuilding) {
@@ -189,13 +203,13 @@ public class Board {
                         squares[y][x] = cottage;
                         break;
                     case "Factory":
-                        squares[y][x] = new Factory(position);
+                        squares[y][x] = BlackBuildingsFactory.createBlackBuilding(position, blackBuildingCard);
                         break;
                     case "Farm":
                         squares[y][x] = RedBuildingsFactory.createRedBuilding(position, redBuildingCard);
                         break;
                     case "Tavern":
-                        squares[y][x] = new Tavern(position);
+                        squares[y][x] = GreenBuildingsFactory.createGreenBuilding(position, greenBuildingCard);
                         break;
                     case "Theater":
                         squares[y][x] = YellowBuildingsFactory.createYellowBuilding(position, yellowBuildingCard);

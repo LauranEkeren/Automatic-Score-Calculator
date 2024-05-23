@@ -39,6 +39,7 @@ public abstract class Square {
         List<Square> columnSquares = this.getColumnSquares(board);
         List<Square> rowSquares = this.getRowSquares(board);
         columnSquares.addAll(rowSquares);
+        columnSquares = columnSquares.stream().distinct().collect(Collectors.toList());
         return columnSquares;
     }
 

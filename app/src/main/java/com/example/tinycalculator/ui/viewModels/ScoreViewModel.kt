@@ -37,6 +37,15 @@ class ScoreViewModel : ViewModel() {
             )
         }
     }
+
+    fun greenBuildingCardSelected(greenBuildingNameSelected: String){
+        _uiState.update { currentState ->
+            currentState.copy(
+                greenBuildingName = greenBuildingNameSelected
+            )
+        }
+    }
+
     fun yellowBuildingCardSelected(yellowBuildingNameSelected: String){
         _uiState.update {currentState ->
             currentState.copy(
@@ -49,6 +58,14 @@ class ScoreViewModel : ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 greyBuildingName = greyBuildingNameSelected
+            )
+        }
+    }
+
+    fun blackBuildingCardSelected(blackBuildingNameSelected: String){
+        _uiState.update { currentState ->
+            currentState.copy(
+                blackBuildingName = blackBuildingNameSelected
             )
         }
     }
@@ -73,6 +90,8 @@ class ScoreViewModel : ViewModel() {
         cards["OrangeBuilding"] = _uiState.value.orangeBuildingName
         cards["YellowBuilding"] = _uiState.value.yellowBuildingName
         cards["GreyBuilding"] = _uiState.value.greyBuildingName
+        cards["GreenBuilding"] = _uiState.value.greenBuildingName
+        cards["BlackBuilding"] = _uiState.value.blackBuildingName
         val rawStringBoard = _uiState.value.rawScoreString
         val board = Board(rawStringBoard, cards)
         val points = board.calculateScore()
@@ -87,6 +106,7 @@ class ScoreViewModel : ViewModel() {
                 scoreTaverns = points["Tavern"] ?: 0,
                 scoreTheaters = points["Theater"] ?: 0,
                 scoreWells = points["Well"] ?: 0,
+                scoreFactories = points["Factory"] ?: 0,
                 scoreMonument = points["Monument"] ?: 0,
                 totalScore = points["TotalScore"] ?:0
             )

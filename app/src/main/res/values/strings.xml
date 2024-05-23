@@ -9,6 +9,7 @@
     <string name="points_taverns">Points Taverns</string>
     <string name="points_wells">Points Wells</string>
     <string name="points_theaters">Points Theaters</string>
+    <string name="points_factories">Points Factories</string>
     <string name="points_monument">Points Monument</string>
     <string name="back_button">Back</string>
     <string name="api_error_text">Api error. Try again.</string>
@@ -17,5 +18,7 @@
     <string name="choose_yellow_building">"Choose Yellow Card"</string>
     <string name="choose_grey_building">"Choose Grey Card</string>
     <string name="choose_orange_building">Choose Orange Card</string>
-    <string name="Choose_red_building">Choose Red Card</string>
+    <string name="choose_red_building">Choose Red Card</string>
+    <string name="choose_green_building">Choose Green Card</string>
+    <string name="choose_black_building">Choose Black Card</string>
 </resources>

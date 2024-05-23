@@ -37,10 +37,12 @@ import com.example.tinycalculator.ui.viewModels.ScoreViewModel
 enum class TinyCalculatorScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
     Score(title = R.string.Score),
-    RedBuilding(title = R.string.Choose_red_building),
+    RedBuilding(title = R.string.choose_red_building),
     OrangeBuilding(title = R.string.choose_orange_building),
     YellowBuilding(title = R.string.choose_yellow_building),
+    GreenBuilding(title = R.string.choose_green_building),
     GreyBuilding(title = R.string.choose_grey_building),
+    BlackBuilding(title = R.string.choose_black_building),
     Monument(title = R.string.choose_monument_card)
 }
 
@@ -134,8 +136,17 @@ fun TinyCalculatorApp(
                     options = DataSourceCards.orangeBuildingCards,
                     onClickCard = {
                         scoreViewModel.orangeBuildingCardSelected(it)
-                        navController.navigate(TinyCalculatorScreen.YellowBuilding.name)
+                        navController.navigate(TinyCalculatorScreen.GreenBuilding.name)
                     })
+            }
+            composable(route=TinyCalculatorScreen.GreenBuilding.name){
+                SelectCardScreen(
+                    options = DataSourceCards.greenBuildingCards,
+                    onClickCard = {
+                        scoreViewModel.greenBuildingCardSelected(it)
+                        navController.navigate(TinyCalculatorScreen.YellowBuilding.name)
+                    }
+                )
             }
             composable(route=TinyCalculatorScreen.YellowBuilding.name){
                 SelectCardScreen(
@@ -151,6 +162,14 @@ fun TinyCalculatorApp(
                     options = DataSourceCards.greyBuildingCards,
                     onClickCard = {
                         scoreViewModel.greyBuildingCardSelected(it)
+                        navController.navigate(TinyCalculatorScreen.BlackBuilding.name)
+                    })
+            }
+            composable(route=TinyCalculatorScreen.BlackBuilding.name){
+                SelectCardScreen(
+                    options = DataSourceCards.blackBuildingCards,
+                    onClickCard = {
+                        scoreViewModel.blackBuildingCardSelected(it)
                         navController.navigate(TinyCalculatorScreen.Monument.name)
                     })
             }

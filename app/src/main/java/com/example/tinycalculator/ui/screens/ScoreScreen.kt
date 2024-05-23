@@ -26,6 +26,7 @@ fun ScoreScreen(
         Triple(stringResource(R.string.points_taverns), scoreUiState.scoreTaverns, true),
         Triple(stringResource(R.string.points_theaters), scoreUiState.scoreTheaters, true),
         Triple(stringResource(R.string.points_wells), scoreUiState.scoreWells, true),
+        Triple(stringResource(R.string.points_factories), scoreUiState.scoreFactories, true),
         Triple(stringResource(R.string.points_monument), scoreUiState.scoreMonument, scoreUiState.monumentInGame),
         Triple(stringResource(R.string.penalty_empty_squares), scoreUiState.penaltyEmptySquare, true)
     )

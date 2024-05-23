@@ -20,7 +20,7 @@ public class Bakery extends YellowBuilding{
         //Get all adjacent squares
         List<Square> adjacentSquares = this.getAdjacentSquares(board);
         boolean hasBlackOrRedBuilding = adjacentSquares.stream()
-                .anyMatch(sq -> sq.squareType == SquareEnum.Factory || sq.squareType == SquareEnum.RedBuilding);
+                .anyMatch(sq -> sq.squareType == SquareEnum.BlackBuilding || sq.squareType == SquareEnum.RedBuilding);
         if (hasBlackOrRedBuilding){
             return 3;
         } else {

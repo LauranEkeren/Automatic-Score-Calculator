@@ -4,10 +4,10 @@ public enum SquareEnum {
     Cottage,
     OrangeBuilding,
     RedBuilding,
-    Tavern,
+    GreenBuilding,
     GreyBuilding,
     YellowBuilding,
-    Factory,
+    BlackBuilding,
     PurpleBuilding,
     Empty
 }

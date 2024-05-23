@@ -17,8 +17,8 @@ public class Abbey extends OrangeBuilding{
     public int getScoreAbbey(Board board){
         boolean isBlackGreenOrYellowBuildingAdjacent = this.getAdjacentSquares(board).stream()
                 .anyMatch(
-                        sq -> sq.squareType == SquareEnum.Factory
-                                || sq.squareType == SquareEnum.Tavern
+                        sq -> sq.squareType == SquareEnum.BlackBuilding
+                                || sq.squareType == SquareEnum.GreenBuilding
                                 || sq.squareType == SquareEnum.YellowBuilding);
         if (isBlackGreenOrYellowBuildingAdjacent){
             return 0;
