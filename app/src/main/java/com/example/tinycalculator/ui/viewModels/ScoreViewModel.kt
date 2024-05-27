@@ -2,7 +2,13 @@ package com.example.tinycalculator.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import com.example.tinycalculator.Domain.Board
+import com.example.tinycalculator.Enums.BlackEnum
+import com.example.tinycalculator.Enums.GreenEnum
+import com.example.tinycalculator.Enums.GreyEnum
+import com.example.tinycalculator.Enums.OrangeEnum
 import com.example.tinycalculator.Enums.PurpleEnum
+import com.example.tinycalculator.Enums.RedEnum
+import com.example.tinycalculator.Enums.YellowEnum
 import com.example.tinycalculator.data.ScoreUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -170,20 +176,23 @@ class ScoreViewModel : ViewModel() {
     }
 
     fun calculateScore(){
-        val cards = HashMap<String, String>()
-        cards["Monument"] = _uiState.value.monumentName
-        cards["RedBuilding"] = _uiState.value.redBuildingName
-        cards["OrangeBuilding"] = _uiState.value.orangeBuildingName
-        cards["YellowBuilding"] = _uiState.value.yellowBuildingName
-        cards["GreyBuilding"] = _uiState.value.greyBuildingName
-        cards["GreenBuilding"] = _uiState.value.greenBuildingName
-        cards["BlackBuilding"] = _uiState.value.blackBuildingName
+        val monumentCard = PurpleEnum.valueOf(_uiState.value.monumentName)
+        val redCard = RedEnum.valueOf(_uiState.value.redBuildingName)
+        val orangeCard = OrangeEnum.valueOf(_uiState.value.orangeBuildingName)
+        val yellowCard = YellowEnum.valueOf(_uiState.value.yellowBuildingName)
+        val greyCard = GreyEnum.valueOf(_uiState.value.greyBuildingName)
+        val greenCard = GreenEnum.valueOf(_uiState.value.greenBuildingName)
+        val blackBuildingCard = BlackEnum.valueOf(_uiState.value.blackBuildingName)
+
         val rawStringBoard = _uiState.value.rawScoreString
         val wareHouseNumber = _uiState.value.amountOnWarehouse
         val amountFeastHallNeighbours = _uiState.value.amountFeastHallOnNeighboursBoard
         val amountStarloom = _uiState.value.amountStarloom
         val amountTree = _uiState.value.amountTree
-        val board = Board(rawStringBoard, cards, wareHouseNumber, amountFeastHallNeighbours, amountStarloom, amountTree)
+        val board = Board(rawStringBoard, monumentCard, redCard, orangeCard,
+            yellowCard, greyCard, greenCard, blackBuildingCard,
+            wareHouseNumber, amountFeastHallNeighbours, amountStarloom,
+            amountTree)
         val points = board.calculateScore()
         _uiState.update {currentState ->
             currentState.copy(

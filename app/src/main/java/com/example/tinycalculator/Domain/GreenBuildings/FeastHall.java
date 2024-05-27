@@ -12,8 +12,8 @@ public class FeastHall extends GreenBuilding{
 
     @Override
     public int getScore(Board board) {
-        int amountFeastHallsOnOwnBoard = this.getAmountTaverns(board);
-        if (amountFeastHallsOnOwnBoard <= board.amountFeastHallNeighbour){
+        int amountFeastHallsOnOwnBoard = this.getAmountGreenBuildings(board);
+        if (amountFeastHallsOnOwnBoard <= board.getAmountFeastHallNeighbour()){
             return 2 * amountFeastHallsOnOwnBoard;
         } else {
             return 3 * amountFeastHallsOnOwnBoard;

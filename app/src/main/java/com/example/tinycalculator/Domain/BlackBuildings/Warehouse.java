@@ -12,6 +12,6 @@ public class Warehouse extends BlackBuilding{
 
     @Override
     public int getScore(Board board) {
-        return -board.warehouseNumber;
+        return -board.getWarehouseNumber();
     }
 }

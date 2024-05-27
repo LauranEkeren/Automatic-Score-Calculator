@@ -12,7 +12,7 @@ public class Almshouse extends GreenBuilding{
 
     @Override
     public int getScore(Board board) {
-        switch (getAmountTaverns(board)){
+        switch (getAmountGreenBuildings(board)){
             case 0: return 0;
             case 1: return -1;
             case 2: return 5;

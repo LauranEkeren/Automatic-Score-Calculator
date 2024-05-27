@@ -43,21 +43,26 @@ public class Board {
     GreyEnum greyBuildingCard;
     BlackEnum blackBuildingCard;
     public OrangeEnum orangeBuildingCard;
-    public final int warehouseNumber;
-    public final int amountFeastHallNeighbour;
+    private final int warehouseNumber;
+    private final int amountFeastHallNeighbour;
     public final int amountStarloom;
     public final int amountTree;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
-    public Board(String stringFromApi, HashMap<String, String> cards, int warehouseNumber, int amountFeastHallNeighbour, int amountStarloom, int amountTree) {
-        monumentCard = PurpleEnum.valueOf(cards.get("Monument"));
-        redBuildingCard = RedEnum.valueOf(cards.get("RedBuilding"));
-        orangeBuildingCard = OrangeEnum.valueOf(cards.get("OrangeBuilding"));
-        yellowBuildingCard = YellowEnum.valueOf(cards.get("YellowBuilding"));
-        greyBuildingCard = GreyEnum.valueOf(cards.get("GreyBuilding"));
-        greenBuildingCard = GreenEnum.valueOf(cards.get("GreenBuilding"));
-        blackBuildingCard = BlackEnum.valueOf(cards.get("BlackBuilding"));
+    public Board(String stringFromApi,
+                 PurpleEnum purpleEnum, RedEnum redEnum, OrangeEnum orangeEnum,
+                 YellowEnum yellowEnum, GreyEnum greyEnum, GreenEnum greenEnum,
+                 BlackEnum blackEnum,
+                 int warehouseNumber, int amountFeastHallNeighbour,
+                 int amountStarloom, int amountTree) {
+        monumentCard = purpleEnum;
+        redBuildingCard = redEnum;
+        orangeBuildingCard = orangeEnum;
+        yellowBuildingCard = yellowEnum;
+        greyBuildingCard = greyEnum;
+        greenBuildingCard = greenEnum;
+        blackBuildingCard = blackEnum;
         this.warehouseNumber = warehouseNumber;
         this.amountFeastHallNeighbour = amountFeastHallNeighbour;
         this.amountStarloom = amountStarloom;
@@ -65,7 +70,6 @@ public class Board {
         String[] stringObjects = getStringArrayFromJsonString(stringFromApi);
         placeBuildingsInGridFromArray(stringObjects);
         squareList = returnSquaresAsList();
-        Log.d("Domain", cards.toString());
     }
 
     public Square[][] getSquares() {
@@ -74,6 +78,14 @@ public class Board {
 
     public List<Square> getSquaresAsList() {
         return squareList;
+    }
+
+    public int getWarehouseNumber(){
+        return this.warehouseNumber;
+    }
+
+    public int getAmountFeastHallNeighbour(){
+        return this.amountFeastHallNeighbour;
     }
 
     public HashMap<String, Integer> calculateScore() {

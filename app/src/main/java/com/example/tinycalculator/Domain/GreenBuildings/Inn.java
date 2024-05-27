@@ -23,13 +23,11 @@ public class Inn extends GreenBuilding{
         List<Square> inns = board.getSquaresAsList().stream()
                 .filter(sq -> sq.squareType == SquareEnum.GreenBuilding)
                 .collect(Collectors.toList());
-        Log.d("Domain", "Amount Inns: " + inns.size());
         for (Square square : inns) {
             int amountInnsInRowAndColumn =
                     (int) square.getRowAndColumnSquares(board).stream().
                     filter(sq -> sq.squareType == SquareEnum.GreenBuilding)
                     .count();
-            Log.d("Domain", "Amount Inns in R+C: " + amountInnsInRowAndColumn);
             if (amountInnsInRowAndColumn == 1
             ){
                 score = score + 3;
