@@ -23,7 +23,7 @@ import com.example.tinycalculator.Enums.RedEnum;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Domain.PurpleBuildings.NoScoringPurpleBuilding;
 import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuilding;
-import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuildingFactory;
+import com.example.tinycalculator.Domain.PurpleBuildings.PurpleBuildingsFactory;
 import com.example.tinycalculator.Enums.PurpleEnum;
 import com.example.tinycalculator.Enums.YellowEnum;
 
@@ -45,8 +45,8 @@ public class Board {
     public OrangeEnum orangeBuildingCard;
     private final int warehouseNumber;
     private final int amountFeastHallNeighbour;
-    public final int amountStarloom;
-    public final int amountTree;
+    private final int amountStarloom;
+    private final int amountTree;
     private final Square[][] squares = new Square[4][4];
     private final List<Square> squareList;
 
@@ -86,6 +86,14 @@ public class Board {
 
     public int getAmountFeastHallNeighbour(){
         return this.amountFeastHallNeighbour;
+    }
+
+    public int getAmountTree(){
+        return this.amountTree;
+    }
+
+    public int getAmountStarloom(){
+        return this.amountStarloom;
     }
 
     public HashMap<String, Integer> calculateScore() {
@@ -238,7 +246,7 @@ public class Board {
                         squares[y][x] = GreyBuildingsFactory.createGreyBuilding(position, greyBuildingCard);
                         break;
                     case "Monument":
-                        squares[y][x] = PurpleBuildingFactory.createSquare(position, monumentCard);
+                        squares[y][x] = PurpleBuildingsFactory.createSquare(position, monumentCard);
                         break;
                     default:
                         squares[y][x] = new EmptySquare(position);

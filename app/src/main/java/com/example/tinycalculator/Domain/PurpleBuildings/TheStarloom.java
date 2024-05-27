@@ -12,7 +12,7 @@ public class TheStarloom extends PurpleBuilding{
 
     @Override
     public int getScore(Board board) {
-        switch (board.amountStarloom){
+        switch (board.getAmountStarloom()){
             case 1: return 6;
             case 2: return 3;
             case 3: return 2;

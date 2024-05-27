@@ -1,12 +1,11 @@
 package com.example.tinycalculator.Domain.RedBuildings;
 
-import android.util.Log;
+
 import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Domain.Board;
 import com.example.tinycalculator.Domain.Cottage;
 import com.example.tinycalculator.Domain.OrangeBuildings.Temple;
-import com.example.tinycalculator.Domain.Square;
 import com.example.tinycalculator.Domain.Utils.BinaryCounter;
 import com.example.tinycalculator.Enums.OrangeEnum;
 import com.example.tinycalculator.Enums.RedEnum;
@@ -21,13 +20,6 @@ import java.util.stream.Collectors;
 public class Farm extends RedBuilding {
     public Farm(Pair<Integer, Integer> position) {
         super(position, RedEnum.Farm);
-    }
-
-    public static List<Farm> getFarms(Board board) {
-        return board.getSquaresAsList().stream()
-                .filter(Farm.class::isInstance)
-                .map(Farm.class::cast)
-                .collect(Collectors.toList());
     }
 
     public void feedCottages(Board board) {
