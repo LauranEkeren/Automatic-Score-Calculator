@@ -92,12 +92,9 @@ public class Farm extends RedBuilding {
                     scoreLoop = scoreLoop + barettCastle.getScore(board);
                     scoreLoop = scoreLoop + Cottage.getScoreCottages(board);
                 }
-                Log.d("TempleFarm", "Scoreloop: " + scoreLoop);
-                Log.d("TempleFarm", "Highest Score: " + highestScore);
                 if (highestScore < scoreLoop) {
                     highestScore = scoreLoop;
                     rightArray = Arrays.copyOf(binaryCounter.countArray, binaryCounter.countArray.length);
-                    Log.d("TempleFarm", "rightArray: " + Arrays.toString(rightArray));
                 }
             } else {
                 break;
