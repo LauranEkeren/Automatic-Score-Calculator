@@ -156,7 +156,6 @@ public class Board {
     }
 
     public Set<Square> getListOfContiguousGroupOfSameBuildingTypeFromSquare(Square square) {
-        Log.d("Domain", square.position.toString());
         SquareEnum squareTypeToLookFor = square.squareType;
         Set<Square> contiguousGroup = new HashSet<>();
         List<Square> squaresToGetAdjacentFrom = new ArrayList<>();
@@ -173,7 +172,6 @@ public class Board {
             squaresToGetAdjacentFrom.remove(currentSquare);
 
         }
-        Log.d("Domain", String.valueOf(contiguousGroup.size()));
         return contiguousGroup;
     }
 

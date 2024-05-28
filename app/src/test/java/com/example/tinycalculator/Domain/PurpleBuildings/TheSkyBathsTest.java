@@ -12,6 +12,7 @@ import com.example.tinycalculator.Domain.EmptySquare;
 import com.example.tinycalculator.Domain.GreenBuildings.Tavern;
 import com.example.tinycalculator.Domain.GreyBuildings.Well;
 import com.example.tinycalculator.Domain.OrangeBuildings.Chapel;
+import com.example.tinycalculator.Domain.RedBuildings.Farm;
 import com.example.tinycalculator.Domain.Square;
 import com.example.tinycalculator.Domain.YellowBuildings.Theater;
 import com.example.tinycalculator.Enums.PurpleEnum;

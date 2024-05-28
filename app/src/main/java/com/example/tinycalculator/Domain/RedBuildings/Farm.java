@@ -15,7 +15,6 @@ import com.example.tinycalculator.Enums.PurpleEnum;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Farm extends RedBuilding {
     public Farm(Pair<Integer, Integer> position) {

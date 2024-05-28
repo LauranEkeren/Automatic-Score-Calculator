@@ -1,6 +1,5 @@
 package com.example.tinycalculator.Domain.RedBuildings;
 
-import android.util.Log;
 import androidx.core.util.Pair;
 
 import com.example.tinycalculator.Domain.Board;
@@ -90,8 +89,6 @@ public class Greenhouse extends RedBuilding {
         if (barettCastle != null) {
             amountToFeed++;
         }
-        Log.d("Domain", "Amount to feed: " + amountToFeed);
-        Log.d("Domain", "Groups size: " + contiguousGroups.size());
 
         BinaryCounter binaryCounter = new BinaryCounter(amountToFeed);
         int highestScore = 0;
@@ -109,8 +106,6 @@ public class Greenhouse extends RedBuilding {
                 }
                 int scoreLoop = temple.getScore(board);
                 scoreLoop = scoreLoop + Cottage.getScoreCottages(board);
-                Log.d("TempleFarm", "Scoreloop: " + scoreLoop);
-                Log.d("TempleFarm", "Highest Score: " + highestScore);
                 if (barettCastle != null) {
                     scoreLoop = scoreLoop + barettCastle.getScore(board);
                 }
