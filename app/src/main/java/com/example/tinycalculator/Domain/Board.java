@@ -97,8 +97,6 @@ public class Board {
     }
 
     public HashMap<String, Integer> calculateScore() {
-        Log.d("Log", "From Board.java: calculateScore line 30");
-        Log.d("Log", squaresToString());
         HashMap<String, Integer> points = new HashMap<>();
         int totalScore = 0;
 

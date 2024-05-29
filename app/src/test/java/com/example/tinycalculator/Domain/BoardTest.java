@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import androidx.core.util.Pair;
 
@@ -24,6 +25,7 @@ import com.example.tinycalculator.Enums.YellowEnum;
 
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -232,6 +234,56 @@ public class BoardTest {
         assertThat(cornerSquares, hasItem(board.getSquares()[0][3]));
         assertThat(cornerSquares, hasItem(board.getSquares()[3][0]));
         assertThat(cornerSquares, hasItem(board.getSquares()[3][3]));
+    }
+
+    @Test
+    public void calculateScore_ShouldReturnCorrectScoreForScene1(){
+        String boardString =
+                "Cottage, Well, Cottage, Factory," +
+                "Well, Cottage, Empty, Empty," +
+                "Theater, Farm, Tavern, Tavern," +
+                "Chapel, Cottage, Well, Factory";
+        Board board = new Board(boardString,
+                PurpleEnum.NoPurpleBuilding, RedEnum.Farm, OrangeEnum.Chapel,
+                YellowEnum.Theater, GreyEnum.Well, GreenEnum.Tavern,
+                BlackEnum.Factory, 0, 0,
+                0, 0);
+
+        HashMap<String, Integer> score = board.calculateScore();
+        assertEquals(12, (int) score.get("Cottage"));
+        assertEquals(4, (int) score.get("Chapel"));
+        assertEquals(5, (int) score.get("Tavern"));
+        assertEquals(5, (int) score.get("Theater"));
+        assertEquals(6, (int) score.get("Well"));
+        assertEquals(0, (int) score.get("Factory"));
+        assertFalse(score.containsKey("Monument"));
+        assertEquals(-2, (int) score.get("EmptyPenalty"));
+        assertEquals(30, ((int) score.get("TotalScore")));
+    }
+
+    @Test
+    public void calculateScore_ShouldReturnCorrectScoreForScene1364(){
+        String boardString =
+                "Cottage, Well, Cottage, Factory," +
+                        "Well, Cottage, Empty, Empty," +
+                        "Theater, Farm, Tavern, Tavern," +
+                        "Chapel, Cottage, Well, Factory";
+        Board board = new Board(boardString,
+                PurpleEnum.NoPurpleBuilding, RedEnum.Farm, OrangeEnum.Chapel,
+                YellowEnum.Theater, GreyEnum.Well, GreenEnum.Tavern,
+                BlackEnum.Factory, 0, 0,
+                0, 0);
+
+        HashMap<String, Integer> score = board.calculateScore();
+        assertEquals(12, (int) score.get("Cottage"));
+        assertEquals(4, (int) score.get("Chapel"));
+        assertEquals(5, (int) score.get("Tavern"));
+        assertEquals(5, (int) score.get("Theater"));
+        assertEquals(6, (int) score.get("Well"));
+        assertEquals(0, (int) score.get("Factory"));
+        assertFalse(score.containsKey("Monument"));
+        assertEquals(-2, (int) score.get("EmptyPenalty"));
+        assertEquals(30, ((int) score.get("TotalScore")));
     }
 
 
