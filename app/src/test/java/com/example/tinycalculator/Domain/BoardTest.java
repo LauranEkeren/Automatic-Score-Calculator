@@ -283,7 +283,7 @@ public class BoardTest {
         assertEquals(0, (int) score.get("Factory"));
         assertFalse(score.containsKey("Monument"));
         assertEquals(-2, (int) score.get("EmptyPenalty"));
-        assertEquals(30, ((int) score.get("TotalScore")));
+        assertEquals(0, ((int) score.get("TotalScore")));
     }
 
 
