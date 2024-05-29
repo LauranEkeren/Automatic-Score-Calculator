@@ -46,22 +46,22 @@ jobs:
     - name: Build with Gradle 8.4
       run: gradle build
 
-  test:
-
+  unit-tests: #Defines another job called unit tests
+    name: 🧪 Unit Tests
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
 
-    - name: Run tests
-      run: cleanTestDebugUnitTest testDebugUnitTest
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Execute unit tests
+        run: ./gradlew test --stacktrace # Execute gradle script to execute unit tests
+
+      - name: Generate test report # Generates tests reports as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_tests_report.html
+          path: app/build/reports/tests/testDebugUnitTest/
   
 
   dependency-submission:
