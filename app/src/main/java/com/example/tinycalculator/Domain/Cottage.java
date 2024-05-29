@@ -2,6 +2,7 @@ package com.example.tinycalculator.Domain;
 
 import androidx.core.util.Pair;
 
+import com.example.tinycalculator.Domain.PurpleBuildings.GrandMausoleumOfTheRodina;
 import com.example.tinycalculator.Enums.SquareEnum;
 import com.example.tinycalculator.Enums.PurpleEnum;
 
@@ -15,7 +16,7 @@ public class Cottage extends Square {
     }
 
     public static int getScoreCottages(Board board){
-        if (board.monumentCard == PurpleEnum.GrandMausoleumOfTheRodina){
+        if (GrandMausoleumOfTheRodina.getGrandMausoleumOfTheRodinaFromBoard(board) != null){
             return 3 * getCottages(board).size();
         }
         int amountCottagesFed = getAmountFedCottages(board);

@@ -46,8 +46,6 @@ public class BarettCastleTest {
                 "Empty, Monument, Empty, Empty," +
                 "Empty, Empty, Empty, Empty," +
                 "Empty, Empty, Empty, Empty";
-
-
         boardNoBarrettCastleCard = new Board(stringOnlyMonumentBuilding,
                 PurpleEnum.ArchitectGuild, redEnum, orangeEnum, yellowEnum, greyEnum,
                 greenEnum, blackEnum, 0, 0,
@@ -101,6 +99,12 @@ public class BarettCastleTest {
     public void BarettCastle_HasCorrectPurpleEnum(){
         BarettCastle barettCastle = new BarettCastle(Pair.create(0, 0));
         assertEquals(PurpleEnum.BarettCastle, barettCastle.purpleBuildingType);
+    }
+
+    @Test
+    public void BarettCastle_IsNotFedOnCreation(){
+        BarettCastle barettCastle = new BarettCastle(Pair.create(0, 0));
+        assertFalse(barettCastle.isFed);
     }
 
     @Test

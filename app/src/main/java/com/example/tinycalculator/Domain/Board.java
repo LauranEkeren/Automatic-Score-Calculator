@@ -170,7 +170,6 @@ public class Board {
                     .collect(Collectors.toList());
             squaresToGetAdjacentFrom.addAll(squaresToAdd);
             squaresToGetAdjacentFrom.remove(currentSquare);
-
         }
         return contiguousGroup;
     }

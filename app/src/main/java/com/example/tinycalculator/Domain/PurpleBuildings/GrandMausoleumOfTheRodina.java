@@ -14,4 +14,14 @@ public class GrandMausoleumOfTheRodina extends PurpleBuilding{
     public int getScore(Board board) {
         return 0;
     }
+
+    public static GrandMausoleumOfTheRodina getGrandMausoleumOfTheRodinaFromBoard(Board board){
+        if (board.monumentCard != PurpleEnum.GrandMausoleumOfTheRodina){
+            return null;
+        }
+        return  board.getSquaresAsList().stream()
+                .filter(PurpleBuilding.class::isInstance)
+                .findAny().map(GrandMausoleumOfTheRodina.class::cast)
+                .orElse(null);
+    }
 }

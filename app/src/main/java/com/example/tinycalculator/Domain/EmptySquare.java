@@ -28,7 +28,6 @@ public class EmptySquare extends Square {
                 return 0;
             }
         }
-
         return -getEmptySquares(board).size();
     }
 }
