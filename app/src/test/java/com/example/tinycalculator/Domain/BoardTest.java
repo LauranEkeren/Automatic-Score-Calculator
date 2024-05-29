@@ -264,26 +264,30 @@ public class BoardTest {
     @Test
     public void calculateScore_ShouldReturnCorrectScoreForScene1364(){
         String boardString =
-                "Cottage, Well, Cottage, Factory," +
-                        "Well, Cottage, Empty, Empty," +
-                        "Theater, Farm, Tavern, Tavern," +
-                        "Chapel, Cottage, Well, Factory";
+                "Cottage, Factory, Factory, Tavern," +
+                "Cottage, Farm, Empty, Tavern," +
+                "Chapel, Theater, Well, Well," +
+                "Chapel, Empty, Tavern, Tavern";
         Board board = new Board(boardString,
-                PurpleEnum.NoPurpleBuilding, RedEnum.Farm, OrangeEnum.Chapel,
-                YellowEnum.Theater, GreyEnum.Well, GreenEnum.Tavern,
-                BlackEnum.Factory, 0, 0,
+                PurpleEnum.NoPurpleBuilding,
+                RedEnum.Farm,
+                OrangeEnum.Abbey,
+                YellowEnum.Bakery,
+                GreyEnum.Fountain,
+                GreenEnum.Almshouse,
+                BlackEnum.Bank, 0, 0,
                 0, 0);
 
         HashMap<String, Integer> score = board.calculateScore();
-        assertEquals(12, (int) score.get("Cottage"));
-        assertEquals(4, (int) score.get("Chapel"));
-        assertEquals(5, (int) score.get("Tavern"));
-        assertEquals(5, (int) score.get("Theater"));
-        assertEquals(6, (int) score.get("Well"));
-        assertEquals(0, (int) score.get("Factory"));
+        assertEquals(6, (int) score.get("Cottage"));
+        assertEquals(3, (int) score.get("Chapel"));
+        assertEquals(15, (int) score.get("Tavern"));
+        assertEquals(3, (int) score.get("Theater"));
+        assertEquals(4, (int) score.get("Well"));
+        assertEquals(8, (int) score.get("Factory"));
         assertFalse(score.containsKey("Monument"));
         assertEquals(-2, (int) score.get("EmptyPenalty"));
-        assertEquals(0, ((int) score.get("TotalScore")));
+        assertEquals(37, ((int) score.get("TotalScore")));
     }
 
 
