@@ -77,6 +77,7 @@ dependencies {
     implementation(libs.androidx.camera.video)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.extensions)
+    implementation(libs.camera.core)
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.hamcrest)
