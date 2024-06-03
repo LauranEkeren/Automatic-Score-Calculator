@@ -62,7 +62,7 @@ fun CameraPreviewScreen(homeViewModel: HomeViewModel) {
 
     AndroidView({ previewView }, modifier = Modifier.fillMaxSize())
     Image(
-        contentScale = ContentScale.FillWidth,
+        contentScale = ContentScale.Crop,
         painter = painterResource(R.drawable.third_option),
         contentDescription = stringResource(R.string.Loading)
     )
@@ -92,9 +92,6 @@ fun CameraPreviewScreen(homeViewModel: HomeViewModel) {
                 modifier = Modifier.padding(10.dp)
             )
         }
-/*        Button(onClick = { captureImage(imageCapture, context, homeViewModel) }) {
-            Text(text = "Capture Image")
-        }*/
     }
 }
 private fun captureImage(imageCapture: ImageCapture, context: Context, homeViewModel: HomeViewModel) {

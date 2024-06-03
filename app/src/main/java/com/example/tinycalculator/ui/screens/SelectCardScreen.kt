@@ -27,6 +27,7 @@ fun SelectCardScreen(
     onClickCard: (String) -> Unit = {},
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
+    Log.d("Test", "Screen")
     LazyVerticalGrid(
         columns = GridCells.Adaptive(300.dp),
         modifier = modifier.padding(horizontal = 4.dp),

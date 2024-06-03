@@ -29,4 +29,7 @@
     <string name="select_amount_buildings">Select Amount Buildings</string>
     <string name="select_amount_buildings_on_board_when_built">Select how many buildings were on the board when you built the monument</string>
     <string name="next">Next</string>
+    <string name="home">Home</string>
+    <string name="next_player">Next Player</string>
+    <string name="show_winner">Show Winner</string>
 </resources>

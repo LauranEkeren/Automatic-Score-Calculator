@@ -1,5 +1,6 @@
 package com.example.tinycalculator.ui.viewModels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.tinycalculator.Domain.Board
 import com.example.tinycalculator.Enums.BlackEnum
@@ -19,6 +20,10 @@ class ScoreViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(ScoreUiState())
     val uiState: StateFlow<ScoreUiState> = _uiState.asStateFlow()
+
+    fun resetScore() {
+        _uiState.value = ScoreUiState()
+    }
 
     fun jsonStringReceived(rawStringBoard: String){
         _uiState.update {currentState ->
@@ -176,6 +181,7 @@ class ScoreViewModel : ViewModel() {
     }
 
     fun calculateScore(){
+        Log.d("Test","calculateScore")
         val monumentCard = PurpleEnum.valueOf(_uiState.value.monumentName)
         val redCard = RedEnum.valueOf(_uiState.value.redBuildingName)
         val orangeCard = OrangeEnum.valueOf(_uiState.value.orangeBuildingName)

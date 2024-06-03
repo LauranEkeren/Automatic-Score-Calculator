@@ -95,7 +95,7 @@ fun WelcomeText() {
 
 @Composable
 fun WelcomeImage(modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.placeholder)
+    val image = painterResource(R.drawable.title)
     Image(
         painter = image,
         contentDescription = null,
@@ -104,7 +104,7 @@ fun WelcomeImage(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ErrorText(homeViewModel: HomeViewModel){
+private fun ErrorText(homeViewModel: HomeViewModel){
     var errorText = ""
     when (homeViewModel.homeUiState) {
 

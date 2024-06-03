@@ -31,6 +31,7 @@ import com.example.tinycalculator.Enums.BlackEnum
 import com.example.tinycalculator.Enums.GreenEnum
 import com.example.tinycalculator.Enums.PurpleEnum
 import com.example.tinycalculator.data.DataSourceCards
+import com.example.tinycalculator.ui.screens.NextPlayerTakesPhotoScreen
 import com.example.tinycalculator.ui.screens.ScoreScreen
 import com.example.tinycalculator.ui.screens.SelectAmount
 import com.example.tinycalculator.ui.screens.SelectCardScreen
@@ -52,6 +53,7 @@ enum class TinyCalculatorScreen(@StringRes val title: Int){
     AmountFeastHallNeighbour(title = R.string.select_amount),
     AmountStarloom(title = R.string.select_position),
     AmountTree(title = R.string.select_amount_buildings),
+    NextPlayerTakesPhoto(title = R.string.next_player)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -124,13 +126,29 @@ fun TinyCalculatorApp(
                 )
             }
             composable(route = TinyCalculatorScreen.Score.name){
-                scoreViewModel.calculateScore()
                 ScoreScreen(
                     scoreUiState = scoreUiState,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(16.dp),
+                    onHomeButtonClicked = {
+                        scoreViewModel.resetScore()
+                        navController.popBackStack(TinyCalculatorScreen.Start.name, inclusive = false)
+                    },
+                    onNextPlayerButtonClicked = {
+                        navController.navigate(TinyCalculatorScreen.NextPlayerTakesPhoto.name)
+                    }
                 )
+            }
+            composable(route = TinyCalculatorScreen.NextPlayerTakesPhoto.name){
+                NextPlayerTakesPhotoScreen(
+                    homeViewModel = homeViewModel,
+                    onRequestReceived = {
+                        scoreViewModel.jsonStringReceived(homeViewModel.grid)
+                        homeViewModel.resetHomeViewModel()
+                        scoreViewModel.calculateScore()
+                        navController.navigate(TinyCalculatorScreen.Score.name)
+                    })
             }
             composable(route = TinyCalculatorScreen.RedBuilding.name){
                 SelectCardScreen(
@@ -222,6 +240,7 @@ fun TinyCalculatorApp(
                             navController.navigate(TinyCalculatorScreen.AmountTree.name)
                         }
                         else {
+                            scoreViewModel.calculateScore()
                             navController.navigate(TinyCalculatorScreen.Score.name)
                         }
                     }
@@ -277,6 +296,7 @@ fun TinyCalculatorApp(
                         scoreViewModel.amountStarloomDecreased()
                     },
                     onNextButtonClicked = {
+                        scoreViewModel.calculateScore()
                         navController.navigate(TinyCalculatorScreen.Score.name)
                     }
                 )
@@ -295,6 +315,7 @@ fun TinyCalculatorApp(
                         scoreViewModel.amountTreeDecreased()
                     },
                     onNextButtonClicked = {
+                        scoreViewModel.calculateScore()
                         navController.navigate(TinyCalculatorScreen.Score.name)
                     }
                 )
@@ -302,4 +323,5 @@ fun TinyCalculatorApp(
         }
     }
 }
+
 
