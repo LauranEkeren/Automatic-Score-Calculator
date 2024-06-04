@@ -160,7 +160,7 @@ class ScoreViewModel : ViewModel() {
 
     fun amountTreeIncreased(){
         val currentTree = _uiState.value.amountTree
-        if (currentTree < 14){
+        if (currentTree < 16){
             _uiState.update {currentState ->
                 currentState.copy(
                     amountTree = currentTree + 1
@@ -181,7 +181,6 @@ class ScoreViewModel : ViewModel() {
     }
 
     fun calculateScore(){
-        Log.d("Test","calculateScore")
         val monumentCard = PurpleEnum.valueOf(_uiState.value.monumentName)
         val redCard = RedEnum.valueOf(_uiState.value.redBuildingName)
         val orangeCard = OrangeEnum.valueOf(_uiState.value.orangeBuildingName)
